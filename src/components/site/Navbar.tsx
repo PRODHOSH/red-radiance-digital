@@ -4,12 +4,12 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 
 const links = [
-  { href: "#home",         label: "Home" },
-  { href: "#services",     label: "Services" },
-  { href: "#gallery",      label: "Gallery" },
-  { href: "#testimonials", label: "Testimonials" },
-  { href: "#offers",       label: "Offers" },
-  { href: "#contact",      label: "Contact" },
+  { href: "/",              label: "Home" },
+  { href: "/#services",     label: "Services" },
+  { href: "/#gallery",      label: "Gallery" },
+  { href: "/#testimonials", label: "Testimonials" },
+  { href: "/#offers",       label: "Offers" },
+  { href: "/#contact",      label: "Contact" },
 ];
 
 export function Navbar() {
@@ -57,7 +57,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-3">
             <a
-              href="#booking"
+              href="/#booking"
               className="hidden border-2 border-rr-red bg-rr-red px-5 py-2.5 text-sm font-semibold text-white shadow-[4px_4px_0_rgba(0,0,0,0.15)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none sm:inline-block"
             >
               Book Now
@@ -94,7 +94,7 @@ export function Navbar() {
                 </a>
               ))}
               <a
-                href="#booking"
+                href="/#booking"
                 onClick={() => setOpen(false)}
                 className="mt-2 border-2 border-rr-red bg-rr-red px-5 py-3 text-center text-sm font-semibold text-white shadow-[4px_4px_0_rgba(0,0,0,0.15)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
               >

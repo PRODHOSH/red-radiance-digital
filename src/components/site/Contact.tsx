@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, Instagram, MapPin, Clock } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
 import { Reveal, SectionLabel } from "./Reveal";
 
 export function Contact() {
@@ -29,7 +29,6 @@ export function Contact() {
               <div className="flex gap-3 pt-2">
                 <a href="tel:+919597814476" className={pillBtn}><Phone size={14} /> Call</a>
                 <a href="https://wa.me/919597814476" target="_blank" rel="noreferrer" className={pillBtn}><MessageCircle size={14} /> WhatsApp</a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" className={pillBtn}><Instagram size={14} /> Instagram</a>
               </div>
             </div>
           </Reveal>

@@ -108,21 +108,6 @@ export function About() {
             ))}
           </div>
 
-          {/* Stats */}
-          <div className="mt-10 grid grid-cols-3 gap-4 border-t border-rr-ink/8 pt-7">
-            <div>
-              <Counter to={5000} suffix="+" />
-              <div className="mt-0.5 text-[10px] uppercase tracking-widest text-rr-ink/45">Clients</div>
-            </div>
-            <div>
-              <Counter to={14} suffix="+" />
-              <div className="mt-0.5 text-[10px] uppercase tracking-widest text-rr-ink/45">Years</div>
-            </div>
-            <div>
-              <Counter to={30} suffix="+" />
-              <div className="mt-0.5 text-[10px] uppercase tracking-widest text-rr-ink/45">Services</div>
-            </div>
-          </div>
         </div>
 
       </div>

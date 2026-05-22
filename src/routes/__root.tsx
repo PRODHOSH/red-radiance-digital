@@ -106,6 +106,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <Scripts />
+        <script src="https://www.noupe.com/embed/019e50b102a37b74aeb60fdcff4ec67ed1e4.js" />
       </body>
     </html>
   );

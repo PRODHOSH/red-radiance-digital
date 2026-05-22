@@ -1,4 +1,4 @@
-import { Instagram, MessageCircle, Phone } from "lucide-react";
+import { MessageCircle, Phone } from "lucide-react";
 import { Logo } from "./Logo";
 
 export function Footer() {
@@ -14,7 +14,6 @@ export function Footer() {
             <div className="mt-6 flex gap-3">
               <a href="tel:+919597814476"        className={ico}><Phone       size={15} /></a>
               <a href="https://wa.me/919597814476" className={ico}><MessageCircle size={15} /></a>
-              <a href="https://instagram.com"    className={ico}><Instagram   size={15} /></a>
             </div>
           </div>
 

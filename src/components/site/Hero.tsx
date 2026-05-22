@@ -11,12 +11,12 @@ export function Hero() {
   const imgY     = useTransform(scrollYProgress, [0, 1], [0, 160]);
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const textY    = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const overlayO = useTransform(scrollYProgress, [0, 1], [0.65, 0.88]);
+  const overlayO = useTransform(scrollYProgress, [0, 1], [0.75, 0.92]);
 
   return (
     <section id="home" ref={ref} className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-rr-ink">
       <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0 origin-center">
-        <img src={HERO_IMG} alt="Red Radiance salon interior" className="h-full w-full object-cover" fetchPriority="high" />
+        <img src={HERO_IMG} alt="Red Radiance salon interior" className="h-full w-full scale-105 object-cover blur-[3px] brightness-75" fetchPriority="high" />
       </motion.div>
       <motion.div
         style={{ opacity: overlayO }}

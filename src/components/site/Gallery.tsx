@@ -26,12 +26,12 @@ export function Gallery() {
   const filtered = tab === "All" ? ITEMS : ITEMS.filter((i) => i.cat === tab);
 
   return (
-    <section id="gallery" className="relative bg-rr-black py-24 sm:py-32">
+    <section id="gallery" className="relative bg-rr-cream py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <Reveal>
             <SectionLabel>Gallery</SectionLabel>
-            <h2 className="font-bebas mt-2 text-[clamp(2.5rem,7vw,6rem)] leading-none text-white">
+            <h2 className="font-bebas mt-2 text-[clamp(2.5rem,7vw,6rem)] leading-none text-rr-ink">
               MOMENTS OF <span className="text-rr-red">RADIANCE</span>
             </h2>
           </Reveal>
@@ -43,8 +43,8 @@ export function Gallery() {
                   onClick={() => setTab(t)}
                   className={`border px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all duration-150 ${
                     tab === t
-                      ? "border-rr-red bg-rr-red text-white shadow-[3px_3px_0_rgba(255,255,255,0.15)]"
-                      : "border-white/15 text-white/45 shadow-[3px_3px_0_rgba(192,0,0,0.3)] hover:translate-x-0.5 hover:translate-y-0.5 hover:border-rr-red/50 hover:shadow-none hover:text-white/80"
+                      ? "border-rr-red bg-rr-red text-white shadow-[3px_3px_0_rgba(0,0,0,0.15)]"
+                      : "border-rr-ink/15 text-rr-ink/50 shadow-[3px_3px_0_rgba(192,0,0,0.2)] hover:translate-x-0.5 hover:translate-y-0.5 hover:border-rr-red/50 hover:shadow-none hover:text-rr-ink"
                   }`}
                 >
                   {t}
@@ -54,10 +54,7 @@ export function Gallery() {
           </Reveal>
         </div>
 
-        <motion.div
-          layout
-          className="grid auto-rows-[200px] grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4"
-        >
+        <motion.div layout className="grid auto-rows-[200px] grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           <AnimatePresence>
             {filtered.map((it, i) => (
               <motion.button
@@ -68,15 +65,10 @@ export function Gallery() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: i * 0.04 }}
                 onClick={() => setActive(it)}
-                className={`group relative overflow-hidden border border-white/8 shadow-[4px_4px_0_rgba(192,0,0,0.25)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none ${it.h}`}
+                className={`group relative overflow-hidden border border-rr-ink/10 shadow-[4px_4px_0_rgba(192,0,0,0.2)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none ${it.h}`}
               >
-                <img
-                  src={it.src}
-                  alt={it.cat}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
+                <img src={it.src} alt={it.cat} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110" />
+                <div className="absolute inset-0 bg-linear-to-t from-rr-ink/70 via-transparent to-transparent opacity-40 transition-opacity duration-300 group-hover:opacity-90" />
                 <div className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-rr-red transition-transform duration-300 group-hover:scale-x-100" />
                 <div className="absolute bottom-3 left-3 translate-y-2 text-[10px] font-medium uppercase tracking-widest text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   {it.cat}
@@ -87,7 +79,6 @@ export function Gallery() {
         </motion.div>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {active && (
           <motion.div
@@ -95,11 +86,11 @@ export function Gallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActive(null)}
-            className="fixed inset-0 z-80 flex items-center justify-center bg-black/95 p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-80 flex items-center justify-center bg-rr-ink/90 p-6 backdrop-blur-sm"
           >
             <button
               onClick={() => setActive(null)}
-              className="absolute right-6 top-6 border border-white/15 bg-rr-surface p-2.5 text-white shadow-[3px_3px_0_rgba(192,0,0,0.5)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+              className="absolute right-6 top-6 border border-white/15 bg-rr-ink p-2.5 text-white shadow-[3px_3px_0_rgba(192,0,0,0.5)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
               aria-label="Close"
             >
               <X size={18} />

@@ -4,7 +4,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { About } from "@/components/site/About";
 import { Services } from "@/components/site/Services";
-import { Gallery } from "@/components/site/Gallery";
+// import { Gallery } from "@/components/site/Gallery";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Offers } from "@/components/site/Offers";
 import { Booking } from "@/components/site/Booking";
@@ -13,6 +13,7 @@ import { Footer } from "@/components/site/Footer";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { Cursor } from "@/components/site/Cursor";
 import { Loader } from "@/components/site/Loader";
+import { Marquee } from "@/components/site/Marquee";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -23,13 +24,14 @@ function Index() {
     <div className="bg-rr-cream">
       <Loader />
       <ScrollProgress />
-      <Cursor />
+      {/* <Cursor /> */}
       <Navbar />
       <main>
         <Hero />
+        <Marquee />
         <About />
         <Services />
-        <Gallery />
+        {/* <Gallery /> */}
         <Testimonials />
         <Offers />
         <Booking />

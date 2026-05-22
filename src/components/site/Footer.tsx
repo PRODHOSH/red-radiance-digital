@@ -3,17 +3,17 @@ import { Logo } from "./Logo";
 
 export function Footer() {
   return (
-    <footer className="bg-rr-black text-white">
+    <footer className="bg-rr-ink text-white">
       <div className="border-t border-white/6">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Logo />
+            <Logo dark />
             <p className="mt-5 max-w-sm text-sm text-white/40">
               Premium ladies salon in Keelkattalai, Chennai. Where beauty meets personal care.
             </p>
             <div className="mt-6 flex gap-3">
-              <a href="tel:+919999999999"        className={ico}><Phone       size={15} /></a>
-              <a href="https://wa.me/919999999999" className={ico}><MessageCircle size={15} /></a>
+              <a href="tel:+919597814476"        className={ico}><Phone       size={15} /></a>
+              <a href="https://wa.me/919597814476" className={ico}><MessageCircle size={15} /></a>
               <a href="https://instagram.com"    className={ico}><Instagram   size={15} /></a>
             </div>
           </div>

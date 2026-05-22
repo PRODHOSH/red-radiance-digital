@@ -14,18 +14,18 @@ export function Footer() {
     <footer className="bg-rr-ink text-white">
 
       {/* ── Top CTA strip ── */}
-      <div className="border-b border-white/6 px-6 py-14 text-center">
-        <p className="text-[10px] uppercase tracking-[0.45em] text-rr-red">Ready to glow?</p>
+      <div className="bg-rr-red px-6 py-14 text-center">
+        <p className="text-[10px] uppercase tracking-[0.45em] text-white/60">Ready to glow?</p>
         <h2 className="font-bebas mt-3 text-[clamp(2.5rem,6vw,5rem)] leading-none text-white">
           BOOK YOUR APPOINTMENT TODAY
         </h2>
-        <p className="mx-auto mt-3 max-w-md text-sm text-white/40">
+        <p className="mx-auto mt-3 max-w-md text-sm text-white/70">
           Walk in or reserve your slot — our team will confirm within minutes during business hours.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="#booking"
-            className="border-2 border-rr-red bg-rr-red px-8 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(255,255,255,0.1)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+            href="/#booking"
+            className="border-2 border-white bg-white px-8 py-3.5 text-sm font-semibold text-rr-red shadow-[5px_5px_0_rgba(0,0,0,0.2)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
           >
             Book Appointment
           </a>
@@ -33,7 +33,7 @@ export function Footer() {
             href="https://wa.me/919597814476"
             target="_blank"
             rel="noopener noreferrer"
-            className="border-2 border-white/20 px-8 py-3.5 text-sm font-semibold text-white/70 transition-all duration-150 hover:border-rr-red hover:text-white"
+            className="border-2 border-white/50 px-8 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(0,0,0,0.15)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:border-white hover:shadow-none"
           >
             WhatsApp Us
           </a>
@@ -46,9 +46,11 @@ export function Footer() {
         {/* Brand col */}
         <div className="lg:col-span-2">
           <Logo dark />
-          <p className="mt-1 text-[10px] uppercase tracking-[0.4em] text-rr-red">Est. 2011</p>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/40">
-            Premium ladies salon in Keelkattalai, Chennai. Where beauty meets personal care — since 2011.
+          <div className="mt-3 flex items-center gap-2">
+            <span className="border border-rr-red/40 px-2 py-0.5 text-[9px] uppercase tracking-[0.3em] text-rr-red">Est. 2011</span>
+          </div>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/40">
+            Premium ladies salon in Keelkattalai, Chennai. Where beauty meets personal care.
           </p>
 
           {/* Address */}

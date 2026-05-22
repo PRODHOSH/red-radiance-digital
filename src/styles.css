@@ -154,7 +154,12 @@
   .bg-rr-red { background-color: var(--rr-red); }
   .border-rr-red { border-color: var(--rr-red); }
   .bg-rr-cream { background-color: var(--rr-cream); }
+  .text-rr-cream { color: var(--rr-cream); }
   .text-rr-ink { color: var(--rr-ink); }
+  .bg-rr-ink { background-color: var(--rr-ink); }
+  .border-rr-ink { border-color: var(--rr-ink); }
+  .from-rr-red { --tw-gradient-from: var(--rr-red); }
+  .to-rr-red-deep { --tw-gradient-to: var(--rr-red-deep); }
 }
 
 @keyframes rr-float {

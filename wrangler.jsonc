@@ -4,4 +4,11 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/server.ts",
+  "d1_databases": [
+    {
+      "binding": "redradiance_db",
+      "database_name": "redradiance-db",
+      "database_id": "a881295b-6c62-4e83-8d8c-903bf2233515"
+    }
+  ]
 }

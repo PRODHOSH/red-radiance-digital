@@ -5,125 +5,122 @@ import { Calendar, MessageCircle } from "lucide-react";
 const HERO_IMG =
   "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=2000&q=80";
 
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
-};
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const } },
-};
-
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.55, 0.85]);
+  const imgY     = useTransform(scrollYProgress, [0, 1], [0, 160]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
+  const textY    = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const overlayO = useTransform(scrollYProgress, [0, 1], [0.65, 0.88]);
 
   return (
-    <section id="home" ref={ref} className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-      <motion.div style={{ y, scale }} className="absolute inset-0">
-        <img src={HERO_IMG} alt="Red Radiance salon interior" className="h-full w-full object-cover" />
+    <section id="home" ref={ref} className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-rr-black">
+      {/* Parallax image */}
+      <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0 origin-center">
+        <img
+          src={HERO_IMG}
+          alt="Red Radiance salon interior"
+          className="h-full w-full object-cover"
+          fetchPriority="high"
+        />
       </motion.div>
+
+      {/* Dark overlay — heavier at bottom for text legibility */}
       <motion.div
-        style={{ opacity: overlayOpacity }}
-        className="absolute inset-0 bg-gradient-to-b from-[#1a0606]/40 via-[#1a0606]/40 to-[#1a0606]/95"
+        style={{ opacity: overlayO }}
+        className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/60 to-[#080808]/20"
       />
-      {/* floating decorative shapes */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="rr-float absolute left-[8%] top-[22%] h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,90,90,0.35),transparent_70%)] blur-2xl" />
-        <div className="rr-float absolute bottom-[18%] right-[10%] h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(192,0,0,0.4),transparent_70%)] blur-3xl" style={{ animationDelay: "-2s" }} />
-        <svg className="rr-float absolute right-[14%] top-[18%] h-10 w-10 opacity-60" viewBox="0 0 64 64" style={{ animationDelay: "-3s" }}>
-          <path d="M8 22 L18 34 L24 16 L32 32 L40 16 L46 34 L56 22 L52 46 L12 46 Z" fill="#ffffff" fillOpacity="0.85" />
-        </svg>
-      </div>
+      {/* Subtle red glow bottom-right */}
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[50%] w-[40%] bg-[radial-gradient(ellipse_at_bottom_right,rgba(192,0,0,0.18),transparent_70%)]" />
 
-      <div className="relative z-10 flex h-full items-center">
+      {/* Content */}
+      <motion.div
+        style={{ y: textY }}
+        className="absolute inset-x-0 bottom-0 px-6 pb-20 sm:px-12 md:px-16 lg:px-20"
+      >
+        {/* Label */}
         <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="show"
-          className="mx-auto max-w-6xl px-6 text-center text-white"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mb-5 flex items-center gap-3"
         >
-          <motion.div variants={fadeUp} className="mb-6 inline-flex items-center gap-2 rounded-full glass-dark px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-white/90">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#ff5a5a]" />
+          <div className="h-px w-10 bg-rr-red" />
+          <span className="text-[10px] font-medium uppercase tracking-[0.5em] text-white/55">
             Premium Ladies Salon · Chennai
-          </motion.div>
-          <motion.h1
-            variants={fadeUp}
-            className="font-display text-5xl font-medium leading-[1.05] sm:text-6xl md:text-7xl lg:text-[88px]"
-          >
-            Beauty Meets <em className="not-italic text-[#ff8a8a]">Personal</em>
-            <br className="hidden sm:block" /> Care.
-          </motion.h1>
-          <motion.p
-            variants={fadeUp}
-            className="mx-auto mt-6 max-w-2xl text-base text-white/80 sm:text-lg"
-          >
-            Customized beauty services designed to bring out your natural glow and confidence.
-          </motion.p>
-          <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <MagneticButton href="#booking" primary>
-              <Calendar size={18} /> Book Appointment
-            </MagneticButton>
-            <MagneticButton href="https://wa.me/919999999999" target="_blank">
-              <MessageCircle size={18} /> WhatsApp Us
-            </MagneticButton>
-          </motion.div>
+          </span>
         </motion.div>
-      </div>
 
+        {/* Main headline */}
+        <div className="overflow-hidden">
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+          >
+            <h1 className="font-bebas text-[22vw] leading-none text-rr-red sm:text-[16vw] md:text-[13vw] lg:text-[11vw]">
+              RED
+            </h1>
+          </motion.div>
+        </div>
+        <div className="overflow-hidden -mt-[2vw]">
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
+          >
+            <h1 className="font-bebas text-[22vw] leading-none text-white sm:text-[16vw] md:text-[13vw] lg:text-[11vw]">
+              RADIANCE
+            </h1>
+          </motion.div>
+        </div>
+
+        {/* Sub-row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.75 }}
+          className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <p className="font-display max-w-sm text-base italic text-white/55 sm:text-lg">
+            Where beauty meets personal care — Keelkattalai, Chennai.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href="#booking"
+              className="inline-flex items-center gap-2 rounded-full bg-rr-red px-7 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-12px_rgba(192,0,0,0.9)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_20px_48px_-10px_rgba(192,0,0,1)]"
+            >
+              <Calendar size={16} /> Book Appointment
+            </a>
+            <a
+              href="https://wa.me/919999999999"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-sm font-semibold text-white/80 backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:text-white"
+            >
+              <MessageCircle size={16} /> WhatsApp
+            </a>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.4em] text-white/70"
+        className="absolute right-6 top-1/2 -translate-y-1/2 hidden flex-col items-center gap-2 lg:flex"
       >
-        <span className="inline-block animate-bounce">↓</span>&nbsp;&nbsp;Scroll
+        <div className="text-[9px] uppercase tracking-[0.4em] text-white/30" style={{ writingMode: "vertical-rl" }}>
+          Scroll
+        </div>
+        <motion.div
+          animate={{ scaleY: [0, 1, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="h-12 w-px origin-top bg-gradient-to-b from-rr-red to-transparent"
+        />
       </motion.div>
     </section>
-  );
-}
-
-function MagneticButton({
-  children,
-  href,
-  primary,
-  target,
-}: {
-  children: React.ReactNode;
-  href: string;
-  primary?: boolean;
-  target?: string;
-}) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const onMove = (e: React.MouseEvent) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const x = e.clientX - r.left - r.width / 2;
-    const y = e.clientY - r.top - r.height / 2;
-    el.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
-  };
-  const onLeave = () => {
-    if (ref.current) ref.current.style.transform = "translate(0,0)";
-  };
-  return (
-    <a
-      ref={ref}
-      href={href}
-      target={target}
-      rel={target ? "noopener noreferrer" : undefined}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className={`inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-[transform,box-shadow,background] duration-300 ${
-        primary
-          ? "bg-rr-red text-white shadow-[0_20px_40px_-12px_rgba(192,0,0,0.8)] hover:shadow-[0_25px_50px_-12px_rgba(192,0,0,1)]"
-          : "glass-dark text-white hover:bg-white/20"
-      }`}
-    >
-      {children}
-    </a>
   );
 }

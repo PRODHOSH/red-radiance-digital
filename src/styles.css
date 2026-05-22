@@ -49,73 +49,48 @@
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.985 0.005 60);
-  --foreground: oklch(0.18 0.02 20);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 20);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 20);
+  --background: oklch(0.08 0.005 20);
+  --foreground: oklch(0.96 0.005 60);
+  --card: oklch(0.1 0.005 20);
+  --card-foreground: oklch(0.96 0.005 60);
+  --popover: oklch(0.1 0.005 20);
+  --popover-foreground: oklch(0.96 0.005 60);
   --primary: oklch(0.48 0.21 27);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0.01 50);
-  --secondary-foreground: oklch(0.18 0.02 20);
-  --muted: oklch(0.96 0.01 50);
-  --muted-foreground: oklch(0.45 0.02 30);
-  --accent: oklch(0.93 0.05 30);
-  --accent-foreground: oklch(0.18 0.02 20);
+  --secondary: oklch(0.14 0.005 20);
+  --secondary-foreground: oklch(0.96 0.005 60);
+  --muted: oklch(0.14 0.005 20);
+  --muted-foreground: oklch(0.55 0.01 30);
+  --accent: oklch(0.16 0.02 27);
+  --accent-foreground: oklch(0.96 0.005 60);
   --destructive: oklch(0.48 0.21 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.01 40);
-  --input: oklch(0.92 0.01 40);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
   --ring: oklch(0.48 0.21 27);
   --chart-1: oklch(0.48 0.21 27);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0.005 60);
-  --sidebar-foreground: oklch(0.18 0.02 20);
+  --sidebar: oklch(0.1 0.005 20);
+  --sidebar-foreground: oklch(0.96 0.005 60);
   --sidebar-primary: oklch(0.48 0.21 27);
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.93 0.05 30);
-  --sidebar-accent-foreground: oklch(0.18 0.02 20);
-  --sidebar-border: oklch(0.9 0.01 40);
+  --sidebar-accent: oklch(0.16 0.02 27);
+  --sidebar-accent-foreground: oklch(0.96 0.005 60);
+  --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.48 0.21 27);
 
+  /* Brand tokens */
   --rr-red: #c00000;
   --rr-red-deep: #8a0000;
-  --rr-cream: #faf6ef;
+  --rr-red-bright: #e83030;
+  --rr-black: #080808;
+  --rr-surface: #111111;
+  --rr-surface-2: #1a1a1a;
+  --rr-cream: #080808;
   --rr-ink: #0e0a08;
-}
-
-.dark {
-  --background: oklch(0.12 0.01 20);
-  --foreground: oklch(0.98 0.005 60);
-  --card: oklch(0.16 0.01 20);
-  --card-foreground: oklch(0.98 0.005 60);
-  --popover: oklch(0.16 0.01 20);
-  --popover-foreground: oklch(0.98 0.005 60);
-  --primary: oklch(0.55 0.22 27);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.22 0.01 20);
-  --secondary-foreground: oklch(0.98 0.005 60);
-  --muted: oklch(0.22 0.01 20);
-  --muted-foreground: oklch(0.7 0.02 40);
-  --accent: oklch(0.3 0.05 27);
-  --accent-foreground: oklch(0.98 0.005 60);
-  --destructive: oklch(0.55 0.22 27);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.55 0.22 27);
-  --sidebar: oklch(0.16 0.01 20);
-  --sidebar-foreground: oklch(0.98 0.005 60);
-  --sidebar-primary: oklch(0.55 0.22 27);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.3 0.05 27);
-  --sidebar-accent-foreground: oklch(0.98 0.005 60);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.55 0.22 27);
 }
 
 @layer base {
@@ -126,8 +101,8 @@
     scroll-behavior: smooth;
   }
   body {
-    background-color: var(--rr-cream);
-    color: var(--color-foreground);
+    background-color: var(--rr-black);
+    color: #f0f0f0;
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -135,35 +110,51 @@
     font-family: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
     letter-spacing: -0.01em;
   }
+  .font-bebas {
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.02em;
+    line-height: 0.92;
+  }
 }
 
 @layer utilities {
+  /* Background utilities */
+  .bg-rr-black   { background-color: var(--rr-black); }
+  .bg-rr-surface { background-color: var(--rr-surface); }
+  .bg-rr-surface-2 { background-color: var(--rr-surface-2); }
+  .bg-rr-cream   { background-color: var(--rr-cream); }
+  .bg-rr-red     { background-color: var(--rr-red); }
+
+  /* Text utilities */
+  .text-rr-red   { color: var(--rr-red); }
+  .text-rr-cream { color: var(--rr-cream); }
+  .text-rr-ink   { color: var(--rr-ink); }
+
+  /* Border utilities */
+  .border-rr-red  { border-color: var(--rr-red); }
+  .border-rr-ink  { border-color: var(--rr-ink); }
+
+  /* Gradient utilities */
+  .from-rr-red     { --tw-gradient-from: var(--rr-red); }
+  .to-rr-red-deep  { --tw-gradient-to: var(--rr-red-deep); }
+
+  /* Glass — dark version */
   .glass {
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: saturate(160%) blur(14px);
-    -webkit-backdrop-filter: saturate(160%) blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(12, 4, 4, 0.72);
+    backdrop-filter: saturate(140%) blur(18px);
+    -webkit-backdrop-filter: saturate(140%) blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
   }
   .glass-dark {
-    background: rgba(20, 8, 8, 0.55);
+    background: rgba(10, 3, 3, 0.65);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
-  .text-rr-red { color: var(--rr-red); }
-  .bg-rr-red { background-color: var(--rr-red); }
-  .border-rr-red { border-color: var(--rr-red); }
-  .bg-rr-cream { background-color: var(--rr-cream); }
-  .text-rr-cream { color: var(--rr-cream); }
-  .text-rr-ink { color: var(--rr-ink); }
-  .bg-rr-ink { background-color: var(--rr-ink); }
-  .border-rr-ink { border-color: var(--rr-ink); }
-  .from-rr-red { --tw-gradient-from: var(--rr-red); }
-  .to-rr-red-deep { --tw-gradient-to: var(--rr-red-deep); }
 }
 
 @keyframes rr-float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  50%       { transform: translateY(-12px); }
 }
 .rr-float { animation: rr-float 6s ease-in-out infinite; }

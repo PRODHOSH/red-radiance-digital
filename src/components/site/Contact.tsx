@@ -3,20 +3,22 @@ import { Reveal, SectionLabel } from "./Reveal";
 
 export function Contact() {
   return (
-    <section id="contact" className="relative bg-white py-24 sm:py-32">
+    <section id="contact" className="relative bg-rr-black py-24 sm:py-32">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-rr-red/25 to-transparent" />
+
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-12">
           <Reveal>
             <SectionLabel>Contact</SectionLabel>
-            <h2 className="font-display text-4xl leading-tight text-rr-ink sm:text-5xl md:text-6xl">
-              Visit our <span className="text-rr-red">studio.</span>
+            <h2 className="font-bebas mt-2 text-[clamp(2.5rem,7vw,6rem)] leading-none text-white">
+              VISIT OUR <span className="text-rr-red">STUDIO</span>
             </h2>
           </Reveal>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-5">
+        <div className="grid gap-6 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
-            <div className="space-y-6 rounded-3xl border border-rr-red/10 bg-rr-cream/60 p-8">
+            <div className="space-y-6 rounded-2xl border border-white/6 bg-rr-surface p-8">
               <Info icon={MapPin} title="Address">
                 No.12/1, Senthur St, SRVS Colony,
                 <br />
@@ -25,44 +27,34 @@ export function Contact() {
                 Keelkattalai, Chennai, Tamil Nadu 600117
               </Info>
               <Info icon={Clock} title="Hours">
-                Open until 9 PM · 7 days
+                Open until 9 PM · 7 days a week
               </Info>
               <Info icon={Phone} title="Phone">
                 +91 99999 99999
               </Info>
 
-              <div className="grid grid-cols-3 gap-3 pt-2">
+              <div className="flex gap-3 pt-2">
                 <a href="tel:+919999999999" className={pillBtn}>
-                  <Phone size={16} /> Call
+                  <Phone size={14} /> Call
                 </a>
-                <a
-                  href="https://wa.me/919999999999"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={pillBtn}
-                >
-                  <MessageCircle size={16} /> WhatsApp
+                <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer" className={pillBtn}>
+                  <MessageCircle size={14} /> WhatsApp
                 </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={pillBtn}
-                >
-                  <Instagram size={16} /> Instagram
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" className={pillBtn}>
+                  <Instagram size={14} /> Instagram
                 </a>
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-3">
-            <div className="overflow-hidden rounded-3xl border border-rr-red/10 shadow-xl">
+            <div className="overflow-hidden rounded-2xl border border-white/6 shadow-[0_20px_60px_-20px_rgba(192,0,0,0.15)]">
               <iframe
                 title="Red Radiance location"
                 src="https://www.google.com/maps?q=Keelkattalai,+Chennai,+Tamil+Nadu+600117&output=embed"
                 width="100%"
                 height="460"
-                style={{ border: 0 }}
+                style={{ border: 0, filter: "invert(0.9) hue-rotate(180deg)" }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -75,25 +67,23 @@ export function Contact() {
 }
 
 const pillBtn =
-  "inline-flex items-center justify-center gap-2 rounded-full bg-rr-red px-3 py-2.5 text-xs font-semibold text-white transition hover:scale-[1.03]";
+  "inline-flex items-center gap-1.5 rounded-full bg-rr-red px-3.5 py-2.5 text-xs font-semibold text-white transition hover:scale-[1.04]";
 
 function Info({
-  icon: Icon,
-  title,
-  children,
+  icon: Icon, title, children,
 }: {
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<{ size?: number }>;
   title: string;
   children: React.ReactNode;
 }) {
   return (
     <div className="flex gap-4">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rr-red/10 text-rr-red">
-        <Icon size={18} />
+        <Icon size={17} />
       </div>
       <div>
-        <div className="text-[11px] uppercase tracking-widest text-rr-ink/50">{title}</div>
-        <div className="mt-1 text-sm leading-relaxed text-rr-ink/85">{children}</div>
+        <div className="text-[10px] uppercase tracking-widest text-white/30">{title}</div>
+        <div className="mt-1 text-sm leading-relaxed text-white/65">{children}</div>
       </div>
     </div>
   );

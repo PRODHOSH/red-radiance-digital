@@ -1,101 +1,209 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { Calendar } from "lucide-react";
 import { Reveal, SectionLabel } from "./Reveal";
 
 type Category = {
   title: string;
+  subtitle: string;
   image: string;
   items: string[];
 };
 
 const CATS: Category[] = [
   {
-    title: "Hair Services",
-    image:
-      "https://images.unsplash.com/photo-1560869713-da86a9ec0744?auto=format&fit=crop&w=1200&q=80",
+    title: "Hair",
+    subtitle: "Services",
+    image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=1600&q=80",
     items: ["Stylish Haircut", "Hair Coloring", "Hair Spa", "Hair Treatments"],
   },
   {
-    title: "Skin Care",
-    image:
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=80",
-    items: ["Facial", "Cleanup", "Detan"],
+    title: "Skin",
+    subtitle: "Care",
+    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=80",
+    items: ["Facial", "Cleanup", "Detan", "Skin Brightening"],
   },
   {
-    title: "Beauty Services",
-    image:
-      "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1200&q=80",
+    title: "Beauty",
+    subtitle: "Services",
+    image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1600&q=80",
     items: ["Waxing", "Threading", "Pedicure", "Manicure"],
   },
   {
-    title: "Bridal Services",
-    image:
-      "https://images.unsplash.com/photo-1595956553066-fe24a8c33395?auto=format&fit=crop&w=1200&q=80",
-    items: ["Bridal Makeup", "Saree Draping", "Party Makeup"],
+    title: "Bridal",
+    subtitle: "Packages",
+    image: "https://images.unsplash.com/photo-1595956553066-fe24a8c33395?auto=format&fit=crop&w=1600&q=80",
+    items: ["Bridal Makeup", "Saree Draping", "Party Makeup", "Pre-Bridal Care"],
   },
 ];
 
+const TOTAL = CATS.length;
+
 export function Services() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
   return (
-    <section id="services" className="relative bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-14 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <Reveal>
-              <SectionLabel>Services</SectionLabel>
-              <h2 className="font-display text-4xl leading-tight text-rr-ink sm:text-5xl md:text-6xl">
-                Crafted treatments,
-                <br />
-                <span className="text-rr-red">tailored just for you.</span>
-              </h2>
-            </Reveal>
-          </div>
+    <section id="services" className="bg-rr-black">
+      {/* Section header */}
+      <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24">
+        <Reveal>
+          <SectionLabel>Services</SectionLabel>
+        </Reveal>
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <Reveal>
+            <h2 className="font-bebas text-[clamp(2.8rem,8vw,7rem)] text-white leading-none">
+              WHAT WE <span className="text-rr-red">DO BEST</span>
+            </h2>
+          </Reveal>
           <Reveal delay={0.1}>
-            <p className="max-w-md text-rr-ink/60">
-              From everyday grooming to bridal couture, every service is delivered with
-              precision and premium products.
+            <p className="max-w-sm text-sm text-white/45 sm:text-right">
+              Scroll through each service — crafted with precision and premium products.
             </p>
           </Reveal>
         </div>
+      </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {CATS.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.08}>
-              <motion.article
-                whileHover={{ y: -8 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="group relative h-[460px] overflow-hidden rounded-3xl bg-rr-ink shadow-xl"
-              >
-                <img
-                  src={c.image}
-                  alt={c.title}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-[1.2s] ease-out group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-rr-ink/95 via-rr-ink/40 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                  <div className="mb-1 text-[10px] uppercase tracking-[0.3em] text-[#ff8a8a]">
-                    {String(i + 1).padStart(2, "0")} — Category
-                  </div>
-                  <h3 className="font-display text-2xl">{c.title}</h3>
-                  <div className="mt-4 max-h-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:max-h-60 group-hover:opacity-100">
-                    <ul className="space-y-1.5 border-t border-white/20 pt-4 text-sm text-white/85">
-                      {c.items.map((it) => (
-                        <li key={it} className="flex items-center gap-2">
-                          <span className="h-1 w-1 rounded-full bg-[#ff8a8a]" />
-                          {it}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="absolute right-5 top-5 rounded-full bg-rr-red px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  Explore
-                </div>
-              </motion.article>
-            </Reveal>
+      {/* Stacked cards — each card = 100vh of scroll */}
+      <div ref={containerRef} style={{ height: `${TOTAL * 100}vh` }}>
+        <div className="sticky top-0 h-screen overflow-hidden">
+          {CATS.map((cat, i) => (
+            <ServiceCard
+              key={cat.title}
+              service={cat}
+              index={i}
+              scrollYProgress={scrollYProgress}
+            />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ServiceCard({
+  service,
+  index,
+  scrollYProgress,
+}: {
+  service: Category;
+  index: number;
+  scrollYProgress: MotionValue<number>;
+}) {
+  // Card 0 starts visible; cards 1–3 slide in from bottom
+  const yInput  = index === 0 ? [0, 1]                              : [(index - 1) / TOTAL, index / TOTAL];
+  const yOutput = index === 0 ? ["0%", "0%"]                        : ["100%", "0%"];
+  const y = useTransform(scrollYProgress, yInput, yOutput);
+
+  // All non-last cards scale down as the next card covers them
+  const scInput  = index < TOTAL - 1 ? [index / TOTAL, (index + 1) / TOTAL] : [0, 1];
+  const scOutput = index < TOTAL - 1 ? [1, 0.94]                             : [1, 1];
+  const scale = useTransform(scrollYProgress, scInput, scOutput);
+
+  const num = String(index + 1).padStart(2, "0");
+
+  return (
+    <motion.div
+      className="absolute inset-0 overflow-hidden"
+      style={{ y, scale, zIndex: index + 1, transformOrigin: "50% 0" }}
+    >
+      {/* ── Desktop: split panel ── */}
+      <div className="hidden h-full lg:flex">
+        {/* Left — content */}
+        <div className="relative flex w-[42%] shrink-0 flex-col justify-center bg-rr-black px-14 xl:px-20">
+          {/* Watermark number */}
+          <div
+            aria-hidden
+            className="font-bebas pointer-events-none absolute -top-6 left-8 select-none text-[clamp(6rem,12vw,11rem)] leading-none text-white/4"
+          >
+            {num}
+          </div>
+          <div className="relative z-10">
+            <p className="mb-3 text-[10px] uppercase tracking-[0.45em] text-rr-red">
+              {num} — {service.subtitle}
+            </p>
+            <h3 className="font-bebas text-[clamp(3.5rem,7vw,6.5rem)] leading-none text-white">
+              {service.title}
+            </h3>
+            <div className="mt-2 h-px w-12 bg-rr-red" />
+            <ul className="mt-8 space-y-3">
+              {service.items.map((item) => (
+                <li key={item} className="flex items-center gap-3 text-white/50">
+                  <span className="h-px w-5 shrink-0 bg-rr-red/60" />
+                  <span className="text-base">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#booking"
+              className="mt-10 inline-flex items-center gap-2 rounded-full bg-rr-red px-7 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-12px_rgba(192,0,0,0.8)] transition-all duration-300 hover:scale-[1.04]"
+            >
+              <Calendar size={15} /> Book Now
+            </a>
+          </div>
+        </div>
+
+        {/* Right — image */}
+        <div className="relative flex-1 overflow-hidden">
+          <img
+            src={service.image}
+            alt={service.title}
+            className="h-full w-full object-cover"
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+          {/* Gradient from left (blends with black panel) */}
+          <div className="absolute inset-0 bg-linear-to-r from-rr-black via-rr-black/10 to-transparent" />
+          {/* Bottom vignette */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-rr-black/60 to-transparent" />
+        </div>
+      </div>
+
+      {/* ── Mobile: image bg + overlaid content ── */}
+      <div className="relative flex h-full flex-col justify-end lg:hidden">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="absolute inset-0 h-full w-full object-cover"
+          loading={index === 0 ? "eager" : "lazy"}
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-rr-black via-rr-black/50 to-rr-black/10" />
+        <div className="relative z-10 px-6 pb-24 pt-8">
+          <p className="mb-2 text-[10px] uppercase tracking-[0.45em] text-rr-red">
+            {num} — {service.subtitle}
+          </p>
+          <h3 className="font-bebas text-[18vw] leading-none text-white">{service.title}</h3>
+          <div className="mt-1 h-px w-10 bg-rr-red" />
+          <ul className="mt-5 space-y-2">
+            {service.items.map((item) => (
+              <li key={item} className="flex items-center gap-2 text-sm text-white/55">
+                <span className="h-px w-4 shrink-0 bg-rr-red/60" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a
+            href="#booking"
+            className="mt-7 inline-flex items-center gap-2 rounded-full bg-rr-red px-6 py-3 text-sm font-semibold text-white"
+          >
+            <Calendar size={14} /> Book Now
+          </a>
+        </div>
+      </div>
+
+      {/* Card progress dots */}
+      <div className="absolute right-6 top-1/2 hidden -translate-y-1/2 flex-col gap-2 lg:flex">
+        {CATS.map((_, k) => (
+          <div
+            key={k}
+            className={`rounded-full transition-all duration-300 ${
+              k === index ? "h-6 w-1 bg-rr-red" : "h-1.5 w-1 bg-white/20"
+            }`}
+          />
+        ))}
+      </div>
+    </motion.div>
   );
 }

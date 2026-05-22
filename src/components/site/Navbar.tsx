@@ -34,9 +34,9 @@ export function Navbar() {
         }`}
       >
         <div
-          className={`mx-3 flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-500 sm:mx-6 sm:px-7 ${
+          className={`mx-3 flex items-center justify-between px-5 py-2.5 transition-all duration-500 sm:mx-6 sm:px-7 ${
             scrolled
-              ? "bg-[#080808]/90 shadow-[0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-xl"
+              ? "border border-white/8 bg-[#080808]/95 shadow-[4px_4px_0_rgba(192,0,0,0.3)] backdrop-blur-xl"
               : "bg-transparent"
           }`}
         >
@@ -60,13 +60,13 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href="#booking"
-              className="hidden rounded-full bg-rr-red px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(192,0,0,0.8)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_12px_32px_-8px_rgba(192,0,0,1)] sm:inline-block"
+              className="hidden border-2 border-rr-red bg-rr-red px-5 py-2.5 text-sm font-semibold text-white shadow-[4px_4px_0_rgba(255,255,255,0.15)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none sm:inline-block"
             >
               Book Now
             </a>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="rounded-full p-2 text-white/70 transition hover:text-white lg:hidden"
+              className="border border-white/15 p-2 text-white/70 transition hover:border-rr-red hover:text-white lg:hidden"
               aria-label="Toggle menu"
             >
               {open ? <X size={22} /> : <Menu size={22} />}
@@ -75,7 +75,6 @@ export function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -83,7 +82,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-3 top-20 z-40 rounded-2xl border border-white/[0.07] bg-[#0e0e0e]/95 p-4 backdrop-blur-xl lg:hidden"
+            className="fixed inset-x-3 top-20 z-40 border-2 border-white/10 bg-[#0e0e0e] p-4 shadow-[6px_6px_0_rgba(192,0,0,0.4)] backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col gap-1">
               {links.map((l) => (
@@ -91,7 +90,7 @@ export function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition hover:bg-white/5 hover:text-white"
+                  className="border border-transparent px-4 py-3 text-sm font-medium text-white/70 transition hover:border-white/10 hover:text-white"
                 >
                   {l.label}
                 </a>
@@ -99,7 +98,7 @@ export function Navbar() {
               <a
                 href="#booking"
                 onClick={() => setOpen(false)}
-                className="mt-2 rounded-full bg-rr-red px-5 py-3 text-center text-sm font-semibold text-white"
+                className="mt-2 border-2 border-rr-red bg-rr-red px-5 py-3 text-center text-sm font-semibold text-white shadow-[4px_4px_0_rgba(255,255,255,0.15)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
               >
                 Book Now
               </a>

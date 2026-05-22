@@ -54,7 +54,7 @@ export function Booking() {
               a few minutes during business hours.
             </p>
           </Reveal>
-          <div className="mt-10 hidden overflow-hidden rounded-2xl shadow-[0_30px_60px_-20px_rgba(192,0,0,0.25)] lg:block">
+          <div className="mt-10 hidden overflow-hidden border-2 border-white/8 shadow-[8px_8px_0_rgba(192,0,0,0.3)] lg:block">
             <img
               src={BOOKING_IMG}
               alt="Salon ambience"
@@ -68,7 +68,7 @@ export function Booking() {
         <Reveal delay={0.1}>
           <form
             onSubmit={submit}
-            className="rounded-2xl border border-white/6 bg-rr-surface p-6 shadow-[0_30px_80px_-30px_rgba(192,0,0,0.2)] sm:p-8"
+            className="border-2 border-white/8 bg-rr-surface p-6 shadow-[8px_8px_0_rgba(192,0,0,0.35)] sm:p-8"
           >
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Name">
@@ -103,14 +103,14 @@ export function Booking() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <button
                 type="submit"
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-rr-red px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_-10px_rgba(192,0,0,0.8)] transition-all hover:scale-[1.02]"
+                className="inline-flex flex-1 items-center justify-center gap-2 border-2 border-rr-red bg-rr-red px-6 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(255,255,255,0.12)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
               >
                 <Calendar size={15} /> Book Appointment
               </button>
               <button
                 type="button"
                 onClick={whatsapp}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-white/10 bg-rr-surface-2 px-6 py-3.5 text-sm font-semibold text-white/70 transition-all hover:border-rr-red/50 hover:text-white"
+                className="inline-flex flex-1 items-center justify-center gap-2 border-2 border-white/15 bg-rr-surface-2 px-6 py-3.5 text-sm font-semibold text-white/70 shadow-[5px_5px_0_rgba(192,0,0,0.35)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:border-rr-red/50 hover:text-white hover:shadow-none"
               >
                 <MessageCircle size={15} /> WhatsApp
               </button>
@@ -126,7 +126,7 @@ export function Booking() {
 }
 
 const inputCls =
-  "w-full rounded-xl border border-white/8 bg-rr-surface-2 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none transition focus:border-rr-red focus:ring-1 focus:ring-rr-red/30";
+  "w-full border-2 border-white/10 bg-rr-surface-2 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none transition-all focus:border-rr-red focus:shadow-[3px_3px_0_rgba(192,0,0,0.4)]";
 
 function Field({
   label, children, className,

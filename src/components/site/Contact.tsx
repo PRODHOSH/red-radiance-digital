@@ -18,7 +18,7 @@ export function Contact() {
 
         <div className="grid gap-6 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
-            <div className="space-y-6 rounded-2xl border border-white/6 bg-rr-surface p-8">
+            <div className="space-y-6 border-2 border-white/8 bg-rr-surface p-8 shadow-[6px_6px_0_rgba(192,0,0,0.35)]">
               <Info icon={MapPin} title="Address">
                 No.12/1, Senthur St, SRVS Colony,
                 <br />
@@ -48,7 +48,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-3">
-            <div className="overflow-hidden rounded-2xl border border-white/6 shadow-[0_20px_60px_-20px_rgba(192,0,0,0.15)]">
+            <div className="overflow-hidden border-2 border-white/8 shadow-[6px_6px_0_rgba(192,0,0,0.35)]">
               <iframe
                 title="Red Radiance location"
                 src="https://www.google.com/maps?q=Keelkattalai,+Chennai,+Tamil+Nadu+600117&output=embed"
@@ -67,7 +67,7 @@ export function Contact() {
 }
 
 const pillBtn =
-  "inline-flex items-center gap-1.5 rounded-full bg-rr-red px-3.5 py-2.5 text-xs font-semibold text-white transition hover:scale-[1.04]";
+  "inline-flex items-center gap-1.5 border-2 border-rr-red bg-rr-red px-3.5 py-2.5 text-xs font-semibold text-white shadow-[3px_3px_0_rgba(255,255,255,0.12)] transition-all duration-150 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none";
 
 function Info({
   icon: Icon, title, children,
@@ -78,7 +78,7 @@ function Info({
 }) {
   return (
     <div className="flex gap-4">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rr-red/10 text-rr-red">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-rr-red/30 bg-rr-red/10 text-rr-red">
         <Icon size={17} />
       </div>
       <div>

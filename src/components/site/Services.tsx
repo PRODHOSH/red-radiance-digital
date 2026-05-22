@@ -14,7 +14,7 @@ const CATS: Category[] = [
   {
     title: "Hair",
     subtitle: "Services",
-    image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=80",
     items: ["Stylish Haircut", "Hair Coloring", "Hair Spa", "Hair Treatments"],
   },
   {
@@ -26,13 +26,13 @@ const CATS: Category[] = [
   {
     title: "Beauty",
     subtitle: "Services",
-    image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1457972729786-0411a3b2b626?auto=format&fit=crop&w=1600&q=80",
     items: ["Waxing", "Threading", "Pedicure", "Manicure"],
   },
   {
     title: "Bridal",
     subtitle: "Packages",
-    image: "https://images.unsplash.com/photo-1595956553066-fe24a8c33395?auto=format&fit=crop&w=1600&q=80",
+    image: "https://images.unsplash.com/photo-1742891602017-40b3a924f476?auto=format&fit=crop&w=1600&q=80",
     items: ["Bridal Makeup", "Saree Draping", "Party Makeup", "Pre-Bridal Care"],
   },
 ];
@@ -139,7 +139,7 @@ function ServiceCard({
             </ul>
             <a
               href="#booking"
-              className="mt-10 inline-flex items-center gap-2 rounded-full bg-rr-red px-7 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-12px_rgba(192,0,0,0.8)] transition-all duration-300 hover:scale-[1.04]"
+              className="mt-10 inline-flex items-center gap-2 border-2 border-rr-red bg-rr-red px-7 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(255,255,255,0.12)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
             >
               <Calendar size={15} /> Book Now
             </a>
@@ -186,7 +186,7 @@ function ServiceCard({
           </ul>
           <a
             href="#booking"
-            className="mt-7 inline-flex items-center gap-2 rounded-full bg-rr-red px-6 py-3 text-sm font-semibold text-white"
+            className="mt-7 inline-flex items-center gap-2 border-2 border-rr-red bg-rr-red px-6 py-3 text-sm font-semibold text-white shadow-[4px_4px_0_rgba(255,255,255,0.1)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
           >
             <Calendar size={14} /> Book Now
           </a>

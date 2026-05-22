@@ -48,7 +48,6 @@ export function About() {
 
   return (
     <section id="about" ref={ref} className="relative overflow-hidden bg-rr-black py-24 sm:py-32">
-      {/* Subtle red glow top-left */}
       <div className="pointer-events-none absolute -left-40 -top-40 h-80 w-80 rounded-full bg-rr-red/10 blur-[100px]" />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
@@ -56,7 +55,7 @@ export function About() {
         <div className="relative">
           <motion.div
             style={{ y: imgY }}
-            className="relative overflow-hidden rounded-[2rem] shadow-[0_40px_80px_-20px_rgba(192,0,0,0.2)]"
+            className="relative overflow-hidden border-2 border-white/10 shadow-[8px_8px_0_rgba(192,0,0,0.4)]"
           >
             <img
               src={ABOUT_IMG}
@@ -68,7 +67,7 @@ export function About() {
 
           {/* Since badge */}
           <Reveal delay={0.2}>
-            <div className="absolute -bottom-6 -right-4 hidden rounded-2xl border border-white/8 bg-rr-surface p-5 shadow-xl backdrop-blur sm:block">
+            <div className="absolute -bottom-6 -right-4 hidden border-2 border-rr-red bg-rr-surface p-5 shadow-[5px_5px_0_rgba(192,0,0,0.6)] sm:block">
               <div className="text-[10px] uppercase tracking-[0.35em] text-rr-red">Since</div>
               <div className="font-bebas text-5xl text-white">2018</div>
             </div>
@@ -94,8 +93,8 @@ export function About() {
           <div className="mt-10 grid gap-3 sm:grid-cols-2">
             {features.map((f, i) => (
               <Reveal key={f.title} delay={0.1 + i * 0.07}>
-                <div className="group rounded-2xl border border-white/6 bg-rr-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-rr-red/30 hover:shadow-[0_20px_40px_-20px_rgba(192,0,0,0.35)]">
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-rr-red/10 text-rr-red transition-colors group-hover:bg-rr-red group-hover:text-white">
+                <div className="group border-2 border-white/8 bg-rr-surface p-5 shadow-[4px_4px_0_rgba(192,0,0,0.3)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center border border-rr-red/30 bg-rr-red/10 text-rr-red transition-colors group-hover:bg-rr-red group-hover:text-white">
                     <f.icon size={18} />
                   </div>
                   <div className="text-sm font-semibold text-white">{f.title}</div>
@@ -105,7 +104,7 @@ export function About() {
             ))}
           </div>
 
-          <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/6 pt-8">
+          <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/8 pt-8">
             <div>
               <Counter to={5000} suffix="+" />
               <div className="mt-1 text-[10px] uppercase tracking-widest text-white/40">Happy clients</div>

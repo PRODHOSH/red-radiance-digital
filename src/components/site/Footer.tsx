@@ -53,4 +53,4 @@ export function Footer() {
 }
 
 const ico =
-  "flex h-9 w-9 items-center justify-center rounded-full border border-white/8 text-white/50 transition hover:border-rr-red hover:bg-rr-red hover:text-white";
+  "flex h-9 w-9 items-center justify-center border border-white/10 text-white/50 shadow-[3px_3px_0_rgba(192,0,0,0.3)] transition-all duration-150 hover:translate-x-0.5 hover:translate-y-0.5 hover:border-rr-red hover:bg-rr-red hover:text-white hover:shadow-none";

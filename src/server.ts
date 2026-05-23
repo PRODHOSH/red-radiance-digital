@@ -127,20 +127,15 @@ async function handleAPI(request: Request, env: Env): Promise<Response | null> {
       return new Response(JSON.stringify({ configured: false }), { headers: JSON_HEADERS });
     }
     try {
-      const now   = new Date();
-      const today = now.toISOString().split("T")[0];
-      const week  = new Date(now.getTime() - 6 * 86400000).toISOString().split("T")[0];
+      const since = new Date(Date.now() - 7 * 86400000).toISOString().split("T")[0];
 
       const query = `{
         viewer {
           zones(filter: {zoneTag: "${env.CF_ZONE_ID}"}) {
-            todayData: httpRequests1hGroups(limit: 24, filter: {datetime_geq: "${today}T00:00:00Z"}) {
+            httpRequests1dGroups(limit: 8, filter: {date_geq: "${since}"}, orderBy: [date_DESC]) {
               sum { pageViews requests }
               uniq { uniques }
-            }
-            weekData: httpRequests1dGroups(limit: 7, filter: {date_geq: "${week}"}, orderBy: [date_DESC]) {
-              sum { pageViews requests }
-              uniq { uniques }
+              dimensions { date }
             }
           }
         }
@@ -152,19 +147,26 @@ async function handleAPI(request: Request, env: Env): Promise<Response | null> {
         body: JSON.stringify({ query }),
       });
 
-      type Group = { sum: { pageViews: number; requests: number }; uniq: { uniques: number } };
-      type CFData = { data: { viewer: { zones: [{ todayData: Group[]; weekData: Group[] }] } } };
-      const cf = await cfRes.json() as CFData;
-      const zone = cf.data.viewer.zones[0];
+      const raw = await cfRes.json() as Record<string, unknown>;
 
-      const sumField = <K extends keyof Group["sum"]>(arr: Group[], f: K) =>
-        arr.reduce((a, g) => a + (g.sum[f] as number), 0);
-      const sumUniq = (arr: Group[]) => arr.reduce((a, g) => a + g.uniq.uniques, 0);
+      // Return raw for debugging if errors present
+      if ((raw as { errors?: unknown }).errors) {
+        return new Response(JSON.stringify({ configured: false, error: JSON.stringify(raw) }), { headers: JSON_HEADERS });
+      }
+
+      type Group = { sum: { pageViews: number; requests: number }; uniq: { uniques: number }; dimensions: { date: string } };
+      const rows = ((raw as { data: { viewer: { zones: [{ httpRequests1dGroups: Group[] }] } } })
+        .data.viewer.zones[0].httpRequests1dGroups) ?? [];
+
+      const todayStr = new Date().toISOString().split("T")[0];
+      const todayRow = rows.find((r) => r.dimensions.date === todayStr);
+
+      const total = (f: keyof Group["sum"]) => rows.reduce((a, r) => a + r.sum[f], 0);
 
       return new Response(JSON.stringify({
         configured: true,
-        today: { pageViews: sumField(zone.todayData, "pageViews"), visitors: sumUniq(zone.todayData) },
-        week:  { pageViews: sumField(zone.weekData, "pageViews"),  visitors: sumUniq(zone.weekData), requests: sumField(zone.weekData, "requests") },
+        today: { pageViews: todayRow?.sum.pageViews ?? 0, visitors: todayRow?.uniq.uniques ?? 0 },
+        week:  { pageViews: total("pageViews"), visitors: rows.reduce((a, r) => a + r.uniq.uniques, 0), requests: total("requests") },
       }), { headers: JSON_HEADERS });
     } catch (e) {
       return new Response(JSON.stringify({ configured: false, error: String(e) }), { headers: JSON_HEADERS });

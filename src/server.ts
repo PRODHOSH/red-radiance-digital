@@ -166,8 +166,8 @@ async function handleAPI(request: Request, env: Env): Promise<Response | null> {
         today: { pageViews: sumField(zone.todayData, "pageViews"), visitors: sumUniq(zone.todayData) },
         week:  { pageViews: sumField(zone.weekData, "pageViews"),  visitors: sumUniq(zone.weekData), requests: sumField(zone.weekData, "requests") },
       }), { headers: JSON_HEADERS });
-    } catch {
-      return new Response(JSON.stringify({ configured: false }), { headers: JSON_HEADERS });
+    } catch (e) {
+      return new Response(JSON.stringify({ configured: false, error: String(e) }), { headers: JSON_HEADERS });
     }
   }
 

@@ -116,6 +116,7 @@ function Sidebar({ page, setPage, onLogout, open, onClose }: {
 /* ══════════════════════ ANALYTICS ══════════════════════ */
 type AnalyticsData = {
   configured: boolean;
+  error?: string;
   today?: { pageViews: number; visitors: number };
   week?:  { pageViews: number; visitors: number; requests: number };
 };
@@ -161,7 +162,12 @@ function AnalyticsPage({ secret }: { secret: string }) {
         </div>
         <div className="border border-white/8 bg-[#111] p-6">
           <p className="mb-1 font-bebas text-lg text-white/50">SETUP REQUIRED</p>
-          <p className="mb-6 text-sm text-white/35">Connect your Google Analytics service account to view live visitor data.</p>
+          <p className="mb-6 text-sm text-white/35">Connect your Cloudflare Analytics to view live visitor data.</p>
+          {data?.error && (
+            <p className="mb-4 rounded border border-red-500/30 bg-red-500/10 px-3 py-2 font-mono text-xs text-red-400">
+              Error: {data.error}
+            </p>
+          )}
           <ol className="space-y-4">
             {steps.map((step, i) => (
               <li key={i} className="flex gap-3 text-sm text-white/50">

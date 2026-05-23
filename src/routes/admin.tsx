@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import {
-  LayoutDashboard, Tag, RefreshCw, LogOut,
-  Save, Trash2, Plus, ExternalLink, X,
+  Tag, RefreshCw, LogOut,
+  Save, Trash2, Plus, X,
+  BarChart2, Menu, Eye, Users, TrendingUp,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({ component: Admin });
@@ -11,7 +12,7 @@ type Offer = {
   id: number; num: string; name: string;
   price: string; summer: number; services: string; active: number;
 };
-type Page = "overview" | "offers";
+type Page = "offers" | "analytics";
 const STORAGE_KEY = "rr_admin_secret";
 
 /* ══════════════════════ LOGIN ══════════════════════ */
@@ -60,119 +61,138 @@ function LoginScreen({ onLogin }: { onLogin: (s: string) => void }) {
 }
 
 /* ══════════════════════ SIDEBAR ══════════════════════ */
-function Sidebar({ page, setPage, onLogout }: { page: Page; setPage: (p: Page) => void; onLogout: () => void }) {
-  const links: { id: Page; label: string; icon: React.ReactNode }[] = [
-    { id: "overview", label: "Overview",  icon: <LayoutDashboard size={16} /> },
-    { id: "offers",   label: "Offers",    icon: <Tag size={16} /> },
+function Sidebar({ page, setPage, onLogout, open, onClose }: {
+  page: Page; setPage: (p: Page) => void; onLogout: () => void;
+  open: boolean; onClose: () => void;
+}) {
+  const links: { id: Page; label: string; icon: ReactNode }[] = [
+    { id: "offers",    label: "Offers",    icon: <Tag size={16} /> },
+    { id: "analytics", label: "Analytics", icon: <BarChart2 size={16} /> },
   ];
 
   return (
-    <aside className="flex w-56 shrink-0 flex-col border-r border-white/6 bg-[#0e0e0e]">
-      {/* Brand */}
-      <div className="border-b border-white/6 px-5 py-5">
-        <p className="font-bebas text-xl tracking-wide text-white">RR Admin</p>
-        <p className="text-[10px] uppercase tracking-widest text-white/25">Management Console</p>
-      </div>
-
-      {/* Nav */}
-      <nav className="flex-1 space-y-0.5 p-3">
-        {links.map((l) => (
-          <button
-            key={l.id}
-            onClick={() => setPage(l.id)}
-            className={`flex w-full items-center gap-3 px-3 py-2.5 text-sm transition-all ${
-              page === l.id
-                ? "bg-rr-red/15 text-white border-l-2 border-rr-red pl-2.5"
-                : "text-white/40 hover:bg-white/5 hover:text-white/70 border-l-2 border-transparent pl-2.5"
-            }`}
-          >
-            {l.icon} {l.label}
-          </button>
-        ))}
-
-        {/* External links */}
-        <div className="pt-4">
-          <p className="px-3 pb-2 text-[9px] uppercase tracking-widest text-white/20">External</p>
-          <a
-            href="https://docs.google.com/spreadsheets"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex w-full items-center gap-3 border-l-2 border-transparent px-3 py-2.5 pl-2.5 text-sm text-white/40 transition hover:bg-white/5 hover:text-white/70"
-          >
-            <ExternalLink size={16} /> Bookings Sheet
-          </a>
-          <a
-            href="/"
-            target="_blank"
-            className="flex w-full items-center gap-3 border-l-2 border-transparent px-3 py-2.5 pl-2.5 text-sm text-white/40 transition hover:bg-white/5 hover:text-white/70"
-          >
-            <ExternalLink size={16} /> View Site
-          </a>
+    <>
+      {open && (
+        <div className="fixed inset-0 z-20 bg-black/60 lg:hidden" onClick={onClose} />
+      )}
+      <aside className={`fixed inset-y-0 left-0 z-30 flex w-56 shrink-0 flex-col border-r border-white/6 bg-[#0e0e0e] transition-transform duration-200 lg:relative lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="flex items-center justify-between border-b border-white/6 px-5 py-5">
+          <div>
+            <p className="font-bebas text-xl tracking-wide text-white">RR Admin</p>
+            <p className="text-[10px] uppercase tracking-widest text-white/25">Management Console</p>
+          </div>
+          <button onClick={onClose} className="text-white/30 hover:text-white lg:hidden"><X size={18} /></button>
         </div>
-      </nav>
 
-      {/* Logout */}
-      <div className="border-t border-white/6 p-3">
-        <button
-          onClick={onLogout}
-          className="flex w-full items-center gap-3 px-3 py-2.5 text-sm text-white/30 transition hover:text-red-400"
-        >
-          <LogOut size={16} /> Sign Out
-        </button>
-      </div>
-    </aside>
+        <nav className="flex-1 space-y-0.5 p-3">
+          {links.map((l) => (
+            <button
+              key={l.id}
+              onClick={() => { setPage(l.id); onClose(); }}
+              className={`flex w-full items-center gap-3 px-3 py-2.5 text-sm transition-all ${
+                page === l.id
+                  ? "bg-rr-red/15 text-white border-l-2 border-rr-red pl-2.5"
+                  : "text-white/40 hover:bg-white/5 hover:text-white/70 border-l-2 border-transparent pl-2.5"
+              }`}
+            >
+              {l.icon} {l.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="border-t border-white/6 p-3">
+          <button
+            onClick={onLogout}
+            className="flex w-full items-center gap-3 px-3 py-2.5 text-sm text-white/30 transition hover:text-red-400"
+          >
+            <LogOut size={16} /> Sign Out
+          </button>
+        </div>
+      </aside>
+    </>
   );
 }
 
-/* ══════════════════════ OVERVIEW ══════════════════════ */
-function Overview({ offers }: { offers: Offer[] }) {
-  const total   = offers.length;
-  const regular = offers.filter((o) => !o.summer).length;
-  const summer  = offers.filter((o) => o.summer).length;
+/* ══════════════════════ ANALYTICS ══════════════════════ */
+type AnalyticsData = {
+  configured: boolean;
+  today?: { pageViews: number; visitors: number };
+  week?:  { pageViews: number; visitors: number; requests: number };
+};
 
-  const cards = [
-    { label: "Total Offers",     value: total,   desc: "Active combo deals on the site" },
-    { label: "Regular Combos",   value: regular, desc: "Standard combo packages" },
-    { label: "Summer Specials",  value: summer,  desc: "Seasonal limited-time offers" },
-  ];
+function StatCard({ label, value, icon }: { label: string; value: number; icon: ReactNode }) {
+  return (
+    <div className="border border-white/8 bg-[#111] p-5">
+      <div className="mb-2 flex items-center gap-2 text-white/30">
+        {icon}
+        <p className="text-[11px] uppercase tracking-widest">{label}</p>
+      </div>
+      <p className="font-bebas text-5xl text-white">{value.toLocaleString()}</p>
+    </div>
+  );
+}
+
+function AnalyticsPage({ secret }: { secret: string }) {
+  const [data, setData] = useState<AnalyticsData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/admin/analytics", { headers: { "x-admin-secret": secret } })
+      .then((r) => r.json() as Promise<AnalyticsData>)
+      .then((d) => { setData(d); setLoading(false); })
+      .catch(() => { setData({ configured: false }); setLoading(false); });
+  }, [secret]);
+
+  if (loading) return <div className="py-20 text-center text-sm text-white/20">Loading analytics...</div>;
+
+  if (!data?.configured) {
+    const steps: ReactNode[] = [
+      "Go to Cloudflare dashboard → redradiance.in → Overview page",
+      "Copy your Zone ID (shown in the right sidebar)",
+      <>Go to <strong className="text-white/70">My Profile → API Tokens → Create Token</strong> → use template <strong className="text-white/70">"Read analytics for a zone"</strong> → select redradiance.in → Create Token → copy it</>,
+      <>In Cloudflare: <strong className="text-white/70">Workers → redradiance → Settings → Variables &amp; Secrets</strong> → add:<br /><code className="text-rr-red/80">CF_ZONE_ID</code> = your Zone ID<br /><code className="text-rr-red/80">CF_API_TOKEN</code> = your API token</>,
+      "Redeploy → analytics will appear here automatically",
+    ];
+    return (
+      <div>
+        <div className="mb-8">
+          <h1 className="text-2xl font-semibold text-white">Analytics</h1>
+          <p className="mt-1 text-sm text-white/35">Site visitor insights</p>
+        </div>
+        <div className="border border-white/8 bg-[#111] p-6">
+          <p className="mb-1 font-bebas text-lg text-white/50">SETUP REQUIRED</p>
+          <p className="mb-6 text-sm text-white/35">Connect your Google Analytics service account to view live visitor data.</p>
+          <ol className="space-y-4">
+            {steps.map((step, i) => (
+              <li key={i} className="flex gap-3 text-sm text-white/50">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center border border-rr-red/30 bg-rr-red/10 font-bebas text-xs text-rr-red">{i + 1}</span>
+                <span className="leading-relaxed">{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-white">Overview</h1>
-        <p className="mt-1 text-sm text-white/35">Red Radiance admin dashboard</p>
+        <h1 className="text-2xl font-semibold text-white">Analytics</h1>
+        <p className="mt-1 text-sm text-white/35">Visitor insights from Google Analytics</p>
       </div>
 
-      {/* Stat cards */}
+      <p className="mb-3 text-[10px] uppercase tracking-widest text-white/30">Today</p>
+      <div className="mb-8 grid gap-4 sm:grid-cols-2">
+        <StatCard label="Page Views" value={data.today!.pageViews} icon={<Eye size={14} />} />
+        <StatCard label="Visitors"   value={data.today!.visitors}  icon={<Users size={14} />} />
+      </div>
+
+      <p className="mb-3 text-[10px] uppercase tracking-widest text-white/30">Last 7 Days</p>
       <div className="grid gap-4 sm:grid-cols-3">
-        {cards.map((c) => (
-          <div key={c.label} className="border border-white/8 bg-[#111] p-5">
-            <p className="text-[11px] uppercase tracking-widest text-white/35">{c.label}</p>
-            <p className="mt-2 font-bebas text-5xl text-white">{c.value}</p>
-            <p className="mt-2 text-xs text-white/30">{c.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Quick links */}
-      <div className="mt-8 border border-white/8 bg-[#111] p-5">
-        <p className="mb-4 text-[11px] uppercase tracking-widest text-white/35">Quick Actions</p>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="https://docs.google.com/spreadsheets"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-white/10 px-4 py-2 text-sm text-white/50 transition hover:border-rr-red/50 hover:text-white"
-          >
-            <ExternalLink size={14} /> View Booking Responses
-          </a>
-          <a
-            href="/" target="_blank"
-            className="inline-flex items-center gap-2 border border-white/10 px-4 py-2 text-sm text-white/50 transition hover:border-rr-red/50 hover:text-white"
-          >
-            <ExternalLink size={14} /> Open Live Site
-          </a>
-        </div>
+        <StatCard label="Page Views" value={data.week!.pageViews} icon={<Eye size={14} />} />
+        <StatCard label="Visitors"   value={data.week!.visitors}  icon={<Users size={14} />} />
+        <StatCard label="Requests"   value={data.week!.requests}  icon={<TrendingUp size={14} />} />
       </div>
     </div>
   );
@@ -209,9 +229,7 @@ function OfferCard({ offer, secret, onRefresh }: { offer: Offer; secret: string;
     <div className="border border-white/8 bg-[#111] p-5">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="border border-rr-red/30 bg-rr-red/10 px-2 py-0.5 font-bebas text-sm text-rr-red">
-            {offer.num}
-          </span>
+          <span className="border border-rr-red/30 bg-rr-red/10 px-2 py-0.5 font-bebas text-sm text-rr-red">{offer.num}</span>
           <span className={`text-[9px] uppercase tracking-widest ${offer.summer ? "text-amber-400" : "text-white/30"}`}>
             {offer.summer ? "☀ Summer Special" : "Regular Combo"}
           </span>
@@ -234,7 +252,7 @@ function OfferCard({ offer, secret, onRefresh }: { offer: Offer; secret: string;
         </div>
         <div className="sm:col-span-2">
           <label className={lbl}>Type</label>
-          <div className="flex gap-2 mt-1">
+          <div className="mt-1 flex gap-2">
             {[{ v: 0, label: "Regular Combo" }, { v: 1, label: "Summer Special" }].map((opt) => (
               <button
                 key={opt.v}
@@ -361,13 +379,14 @@ function OffersPage({ offers, secret, onRefresh, loading }: { offers: Offer[]; s
 /* ══════════════════════ MAIN ══════════════════════ */
 function Admin() {
   const [secret, setSecret] = useState(() => localStorage.getItem(STORAGE_KEY) ?? "");
-  const [page, setPage] = useState<Page>("overview");
+  const [page, setPage] = useState<Page>("offers");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [offers, setOffers] = useState<Offer[]>([]);
   const [loading, setLoading] = useState(false);
 
   const load = async () => {
     setLoading(true);
-    const data = await fetch("/api/offers").then((r) => r.json());
+    const data = await fetch("/api/offers").then((r) => r.json() as Promise<Offer[]>);
     setOffers(data);
     setLoading(false);
   };
@@ -380,21 +399,26 @@ function Admin() {
 
   return (
     <div className="flex h-screen bg-[#0a0a0a] text-white overflow-hidden">
-      <Sidebar page={page} setPage={setPage} onLogout={logout} />
+      <Sidebar page={page} setPage={setPage} onLogout={logout} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      {/* Main */}
       <main className="flex-1 overflow-y-auto">
-        {/* Top bar */}
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/6 bg-[#0a0a0a]/95 px-8 py-4 backdrop-blur">
-          <p className="text-sm font-medium capitalize text-white/70">{page}</p>
-          <button onClick={load} disabled={loading} className="inline-flex items-center gap-1.5 text-xs text-white/30 transition hover:text-white/60 disabled:opacity-40">
-            <RefreshCw size={13} className={loading ? "animate-spin" : ""} /> Refresh
-          </button>
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/6 bg-[#0a0a0a]/95 px-6 py-4 backdrop-blur">
+          <div className="flex items-center gap-3">
+            <button onClick={() => setSidebarOpen(true)} className="text-white/40 hover:text-white lg:hidden">
+              <Menu size={20} />
+            </button>
+            <p className="text-sm font-medium capitalize text-white/70">{page}</p>
+          </div>
+          {page === "offers" && (
+            <button onClick={load} disabled={loading} className="inline-flex items-center gap-1.5 text-xs text-white/30 transition hover:text-white/60 disabled:opacity-40">
+              <RefreshCw size={13} className={loading ? "animate-spin" : ""} /> Refresh
+            </button>
+          )}
         </div>
 
-        <div className="p-8">
-          {page === "overview" && <Overview offers={offers} />}
-          {page === "offers"   && <OffersPage offers={offers} secret={secret} onRefresh={load} loading={loading} />}
+        <div className="p-6 lg:p-8">
+          {page === "offers"    && <OffersPage offers={offers} secret={secret} onRefresh={load} loading={loading} />}
+          {page === "analytics" && <AnalyticsPage secret={secret} />}
         </div>
       </main>
     </div>

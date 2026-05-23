@@ -5,6 +5,8 @@ import { renderErrorPage } from "./lib/error-page";
 interface Env {
   redradiance_db: D1Database;
   ADMIN_SECRET: string;
+  CF_ZONE_ID?: string;
+  CF_API_TOKEN?: string;
 }
 
 type ServerEntry = {
@@ -116,6 +118,57 @@ async function handleAPI(request: Request, env: Env): Promise<Response | null> {
       .bind(deleteMatch[1])
       .run();
     return new Response(JSON.stringify({ ok: true }), { headers: JSON_HEADERS });
+  }
+
+  // ── GET /api/admin/analytics ──
+  if (path === "/api/admin/analytics" && request.method === "GET") {
+    if (!checkAuth()) return new Response("Unauthorized", { status: 401 });
+    if (!env.CF_ZONE_ID || !env.CF_API_TOKEN) {
+      return new Response(JSON.stringify({ configured: false }), { headers: JSON_HEADERS });
+    }
+    try {
+      const now   = new Date();
+      const today = now.toISOString().split("T")[0];
+      const week  = new Date(now.getTime() - 6 * 86400000).toISOString().split("T")[0];
+
+      const query = `{
+        viewer {
+          zones(filter: {zoneTag: "${env.CF_ZONE_ID}"}) {
+            todayData: httpRequests1hGroups(limit: 24, filter: {datetime_geq: "${today}T00:00:00Z"}) {
+              sum { pageViews requests }
+              uniq { uniques }
+            }
+            weekData: httpRequests1dGroups(limit: 7, filter: {date_geq: "${week}"}, orderBy: [date_DESC]) {
+              sum { pageViews requests }
+              uniq { uniques }
+            }
+          }
+        }
+      }`;
+
+      const cfRes = await fetch("https://api.cloudflare.com/client/v4/graphql", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${env.CF_API_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+      });
+
+      type Group = { sum: { pageViews: number; requests: number }; uniq: { uniques: number } };
+      type CFData = { data: { viewer: { zones: [{ todayData: Group[]; weekData: Group[] }] } } };
+      const cf = await cfRes.json() as CFData;
+      const zone = cf.data.viewer.zones[0];
+
+      const sumField = <K extends keyof Group["sum"]>(arr: Group[], f: K) =>
+        arr.reduce((a, g) => a + (g.sum[f] as number), 0);
+      const sumUniq = (arr: Group[]) => arr.reduce((a, g) => a + g.uniq.uniques, 0);
+
+      return new Response(JSON.stringify({
+        configured: true,
+        today: { pageViews: sumField(zone.todayData, "pageViews"), visitors: sumUniq(zone.todayData) },
+        week:  { pageViews: sumField(zone.weekData, "pageViews"),  visitors: sumUniq(zone.weekData), requests: sumField(zone.weekData, "requests") },
+      }), { headers: JSON_HEADERS });
+    } catch {
+      return new Response(JSON.stringify({ configured: false }), { headers: JSON_HEADERS });
+    }
   }
 
   return null; // not an API route — pass to TanStack Start

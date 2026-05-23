@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://redradiance.pages.dev/</loc>
-    <lastmod>2026-05-22</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://redradiance.in/</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://redradiance.pages.dev/terms</loc>
-    <lastmod>2026-05-22</lastmod>
+    <loc>https://redradiance.in/terms</loc>
+    <lastmod>2026-05-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://redradiance.pages.dev/privacy</loc>
-    <lastmod>2026-05-22</lastmod>
+    <loc>https://redradiance.in/privacy</loc>
+    <lastmod>2026-05-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

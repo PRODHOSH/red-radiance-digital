@@ -92,7 +92,7 @@ function ServiceCard({ service, index, scrollYProgress }: { service: Category; i
               ))}
             </ul>
             <a
-              href="#booking"
+              href="/#booking"
               className="mt-10 inline-flex items-center gap-2 border-2 border-rr-red bg-rr-red px-7 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(0,0,0,0.15)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
             >
               <Calendar size={15} /> Book Now
@@ -120,7 +120,7 @@ function ServiceCard({ service, index, scrollYProgress }: { service: Category; i
               </li>
             ))}
           </ul>
-          <a href="#booking" className="mt-7 inline-flex items-center gap-2 border-2 border-rr-red bg-rr-red px-6 py-3 text-sm font-semibold text-white shadow-[4px_4px_0_rgba(0,0,0,0.15)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
+          <a href="/#booking" className="mt-7 inline-flex items-center gap-2 border-2 border-rr-red bg-rr-red px-6 py-3 text-sm font-semibold text-white shadow-[4px_4px_0_rgba(0,0,0,0.15)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
             <Calendar size={14} /> Book Now
           </a>
         </div>

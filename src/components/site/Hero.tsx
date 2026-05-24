@@ -59,8 +59,8 @@ export function Hero() {
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href="#booking"
-              className="inline-flex items-center gap-2 border-2 border-rr-red bg-rr-red px-7 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(0,0,0,0.2)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+              href="/#booking"
+              className="inline-flex items-center justify-center border-2 border-rr-red bg-rr-red px-6 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(192,0,0,0.3)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none sm:w-auto lg:px-8"
             >
               <Calendar size={16} /> Book Appointment
             </a>

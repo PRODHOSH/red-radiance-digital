@@ -84,7 +84,7 @@ export function Footer() {
           <ul className="space-y-2.5 text-sm text-white/45">
             {NAV.map((l) => (
               <li key={l}>
-                <a href={`#${l.toLowerCase()}`} className="inline-block transition-all hover:translate-x-1 hover:text-white">
+                <a href={l === "Home" ? "/" : `/#${l.toLowerCase()}`} className="inline-block transition-all hover:translate-x-1 hover:text-white">
                   {l}
                 </a>
               </li>

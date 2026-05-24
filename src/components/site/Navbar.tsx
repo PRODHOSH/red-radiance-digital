@@ -38,7 +38,7 @@ export function Navbar() {
               : "bg-transparent"
           }`}
         >
-          <a href="#home" className="shrink-0">
+          <a href="/" className="shrink-0">
             <Logo />
           </a>
 

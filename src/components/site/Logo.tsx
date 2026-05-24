@@ -10,7 +10,7 @@ export function Logo({ className = "", mark = false, dark = false }: Props) {
         }`}
       >
         <img
-          src="/images/logo.png"
+          src="https://res.cloudinary.com/ddn6tl045/image/upload/v1779615590/logo_uuvi8k.png"
           alt="Red Radiance"
           className="h-full w-full object-cover"
           style={{

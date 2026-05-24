@@ -13,7 +13,7 @@ export function Hero() {
       <div className="relative h-full lg:hidden">
         {/* Full-bleed portrait image */}
         <img
-          src="/images/hero.png"
+          src="https://res.cloudinary.com/ddn6tl045/image/upload/v1779615591/hero_y2bt26.png"
           alt="Red Radiance bridal styling"
           className="absolute inset-0 h-full w-full object-cover object-[center_8%]"
         />
@@ -142,7 +142,7 @@ export function Hero() {
           style={{ zIndex: 20, height: "96svh", width: "46vw", maxWidth: "640px" }}
         >
           <img
-            src="/images/hero.png"
+            src="https://res.cloudinary.com/ddn6tl045/image/upload/v1779615591/hero_y2bt26.png"
             alt="Red Radiance bridal styling"
             className="h-full w-full object-cover object-top"
           />

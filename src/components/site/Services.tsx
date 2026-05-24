@@ -8,22 +8,22 @@ type Category = { title: string; subtitle: string; image: string; items: string[
 const CATS: Category[] = [
   {
     title: "Hair", subtitle: "Services",
-    image: "/images/hair.png",
+    image: "https://res.cloudinary.com/ddn6tl045/image/upload/v1779615591/hair_hxyk9j.png",
     items: ["Stylish Haircut", "Hair Coloring", "Hair Spa", "Hair Treatments"],
   },
   {
     title: "Skin", subtitle: "Care",
-    image: "/images/skin.png",
+    image: "https://res.cloudinary.com/ddn6tl045/image/upload/v1779615591/skin_fxkvbs.png",
     items: ["Facial", "Cleanup", "Detan", "Skin Brightening"],
   },
   {
     title: "Beauty", subtitle: "Services",
-    image: "/images/beauty.png",
+    image: "https://res.cloudinary.com/ddn6tl045/image/upload/v1779615590/beauty_kqmdso.png",
     items: ["Waxing", "Threading", "Pedicure", "Manicure"],
   },
   {
     title: "Bridal", subtitle: "Packages",
-    image: "/images/bride.png",
+    image: "https://res.cloudinary.com/ddn6tl045/image/upload/v1779615590/bride_el4bfp.png",
     items: ["Bridal Makeup", "Saree Draping", "Party Makeup", "Pre-Bridal Care"],
   },
 ];

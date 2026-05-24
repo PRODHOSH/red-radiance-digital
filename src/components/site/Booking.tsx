@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, cloneElement } from "react";
 import { toast } from "sonner";
 import { MessageCircle, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal, SectionLabel } from "./Reveal";
@@ -42,7 +42,7 @@ function formatTime(t: string) {
 }
 
 /* ── Custom Calendar ── */
-function CalendarPicker({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+function CalendarPicker({ value, onChange, onClose }: { value: string; onChange: (v: string) => void; onClose?: () => void }) {
   const today = new Date();
   const init = value ? new Date(value + "T00:00:00") : today;
   const [view, setView] = useState({ year: init.getFullYear(), month: init.getMonth() });
@@ -60,6 +60,7 @@ function CalendarPicker({ value, onChange }: { value: string; onChange: (v: stri
     const m = String(view.month + 1).padStart(2, "0");
     const d = String(day).padStart(2, "0");
     onChange(`${view.year}-${m}-${d}`);
+    onClose?.();
   };
 
   const isSelected = (day: number) => {
@@ -137,14 +138,14 @@ function CalendarPicker({ value, onChange }: { value: string; onChange: (v: stri
 }
 
 /* ── Time slot picker ── */
-function TimePicker({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+function TimePicker({ value, onChange, onClose }: { value: string; onChange: (v: string) => void; onClose?: () => void }) {
   return (
     <div className="grid grid-cols-4 gap-1.5">
       {TIME_SLOTS.map(slot => (
         <button
           key={slot}
           type="button"
-          onClick={() => onChange(slot)}
+          onClick={() => { onChange(slot); onClose?.(); }}
           className={`rounded-lg px-1.5 py-2 text-xs font-medium transition-all duration-100 ${
             value === slot
               ? "bg-rr-red text-white shadow-sm"
@@ -190,7 +191,9 @@ function DropdownField({
 
       {open && (
         <div className="absolute left-0 top-full z-40 mt-1 w-full rounded-xl bg-rr-surface p-4 shadow-xl ring-1 ring-rr-ink/8">
-          {children}
+          {cloneElement(children as React.ReactElement<{ onClose?: () => void }>, {
+            onClose: () => setOpen(false),
+          })}
         </div>
       )}
     </div>
@@ -266,7 +269,7 @@ export function Booking() {
         </div>
 
         <Reveal delay={0.1}>
-          <form onSubmit={submit} className="rounded-2xl bg-rr-surface p-6 shadow-xl ring-1 ring-rr-ink/8 sm:p-8">
+          <form onSubmit={submit} className="rounded-2xl bg-rr-surface p-6 sm:p-8" style={{ boxShadow: "0 2px 24px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.03)" }}>
             <div className="grid gap-5 sm:grid-cols-2">
               {/* Name */}
               <Field label="Name">

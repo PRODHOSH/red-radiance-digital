@@ -7,7 +7,16 @@ const SERVICES = [
   "Pedicure & Manicure", "Bridal Makeup", "Party Makeup",
 ];
 
-const NAV = ["Home", "Services", "Testimonials", "Offers", "Booking", "Contact"];
+const NAV = [
+  { label: "Home",         href: "/" },
+  { label: "About",        href: "/#about" },
+  { label: "Services",     href: "/#services" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Offers",       href: "/#offers" },
+  { label: "Booking",      href: "/#booking" },
+  { label: "Contact",      href: "/#contact" },
+  { label: "Careers",      href: "/careers" },
+];
 
 export function Footer() {
   return (
@@ -83,9 +92,9 @@ export function Footer() {
           <div className="mb-4 text-[10px] uppercase tracking-[0.35em] text-rr-red">Navigation</div>
           <ul className="space-y-2.5 text-sm text-white/45">
             {NAV.map((l) => (
-              <li key={l}>
-                <a href={l === "Home" ? "/" : `/#${l.toLowerCase()}`} className="inline-block transition-all hover:translate-x-1 hover:text-white">
-                  {l}
+              <li key={l.label}>
+                <a href={l.href} className="inline-block transition-all hover:translate-x-1 hover:text-white">
+                  {l.label}
                 </a>
               </li>
             ))}

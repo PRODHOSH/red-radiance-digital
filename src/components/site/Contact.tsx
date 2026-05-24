@@ -18,7 +18,7 @@ export function Contact() {
 
         <div className="grid gap-6 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
-            <div className="space-y-6 rounded-2xl bg-rr-surface p-8 shadow-lg ring-1 ring-rr-ink/8">
+            <div className="space-y-6 rounded-2xl bg-rr-surface p-8" style={{ boxShadow: "0 2px 24px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.03)" }}>
               <Info icon={MapPin} title="Address">
                 No.12/1, Senthur St, SRVS Colony,<br />
                 Arul Murugan Nagar Extension,<br />
@@ -34,7 +34,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-3">
-            <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-rr-ink/8">
+            <div className="overflow-hidden rounded-2xl" style={{ boxShadow: "0 2px 24px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.03)" }}>
               <iframe
                 title="Red Radiance location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.2641161300617!2d80.189493!3d12.954944000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d1dee127e81%3A0xdb68fe9dcc2618ed!2sRed%20Radiance!5e0!3m2!1sen!2sin!4v1779456726107!5m2!1sen!2sin"

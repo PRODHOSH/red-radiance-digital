@@ -5,11 +5,12 @@ import { Logo } from "./Logo";
 
 const links = [
   { href: "/",              label: "Home" },
+  { href: "/#about",        label: "About" },
   { href: "/#services",     label: "Services" },
-  { href: "/#gallery",      label: "Gallery" },
   { href: "/#testimonials", label: "Testimonials" },
   { href: "/#offers",       label: "Offers" },
   { href: "/#contact",      label: "Contact" },
+  { href: "/careers",       label: "Careers" },
 ];
 
 export function Navbar() {

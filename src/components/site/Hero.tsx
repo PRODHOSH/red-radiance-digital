@@ -111,76 +111,118 @@ export function Hero() {
       ══════════════════════════════════════ */}
       <div className="relative hidden h-full w-full lg:block">
 
-        {/* "RED" — upper left */}
+        {/* "RED" — left, upper */}
         <motion.span
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.1, ease, delay: 0.1 }}
           className="pointer-events-none absolute left-8 select-none font-bebas leading-none text-rr-ink xl:left-14"
-          style={{ fontSize: "min(18vw, 220px)", zIndex: 10, top: "26%" }}
+          style={{ fontSize: "min(18vw, 220px)", zIndex: 10, top: "20%" }}
         >
           RED
         </motion.span>
 
-        {/* ── Central tall image ── */}
+        {/* "RADIANCE" — left, below RED */}
+        <motion.span
+          initial={{ opacity: 0, x: -60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.1, ease, delay: 0.2 }}
+          className="pointer-events-none absolute left-8 select-none font-bebas leading-none text-rr-red xl:left-14"
+          style={{ fontSize: "min(9.5vw, 112px)", zIndex: 10, top: "48%" }}
+        >
+          RADIANCE
+        </motion.span>
+
+        {/* ── Central tall image — bigger ── */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease, delay: 0.0 }}
           className="absolute bottom-0 left-1/2 -translate-x-1/2"
-          style={{ zIndex: 20, height: "94svh", width: "40vw", maxWidth: "560px" }}
+          style={{ zIndex: 20, height: "96svh", width: "46vw", maxWidth: "640px" }}
         >
           <img
             src="/images/hero.png"
             alt="Red Radiance bridal styling"
             className="h-full w-full object-cover object-top"
           />
-          {/* Bottom fade — blends image into cream */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-rr-cream via-rr-cream/60 to-transparent" />
         </motion.div>
 
-        {/* "RADIANCE" — lower right */}
-        <motion.span
-          initial={{ opacity: 0, x: 60 }}
+        {/* Right side — arrow label + CTA card */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.1, ease, delay: 0.2 }}
-          className="pointer-events-none absolute right-8 select-none text-right font-bebas leading-none text-rr-red xl:right-14"
-          style={{ fontSize: "min(10vw, 118px)", zIndex: 10, top: "52%" }}
+          transition={{ delay: 1.0, duration: 0.65, ease }}
+          className="absolute right-8 top-1/2 translate-y-[-60%] xl:right-14 flex flex-col items-start"
+          style={{ zIndex: 30 }}
         >
-          RADIANCE
-        </motion.span>
+          {/* Hand-drawn arrow + label */}
+          <div className="mb-2 ml-3 flex items-center gap-2">
+            <p className="font-display text-[15px] italic text-rr-ink/55">glow up today</p>
+            <svg width="48" height="58" viewBox="0 0 48 58" fill="none" className="text-rr-red/60 shrink-0">
+              <path
+                d="M8 4 C2 16, 2 36, 34 52"
+                stroke="currentColor" strokeWidth="2"
+                strokeDasharray="4.5 3.5" strokeLinecap="round"
+              />
+              <path
+                d="M27 49 L34 55 L38 47"
+                stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round"
+              />
+            </svg>
+          </div>
 
-        {/* Bottom-left: tagline + CTAs */}
-        <div className="absolute bottom-10 left-10 xl:left-16" style={{ zIndex: 30 }}>
+          {/* Book Appointment */}
+          <a
+            href="/#booking"
+            className="group relative overflow-hidden rounded-2xl px-5 py-4 shadow-[0_8px_32px_rgba(225,14,17,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(225,14,17,0.55)] active:scale-[0.97]"
+            style={{ background: "linear-gradient(135deg, #e10e11 0%, #c00b0d 100%)" }}
+          >
+            {/* Shine sweep on hover */}
+            <div className="pointer-events-none absolute inset-0 translate-x-[-110%] bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-[110%]" />
+            <div className="flex items-center gap-3">
+              <div className="rounded-full bg-white/20 p-2">
+                <Calendar size={15} strokeWidth={2.5} className="text-white" />
+              </div>
+              <div>
+                <p className="text-[8px] font-semibold uppercase tracking-[0.35em] text-white/65">Reserve your slot</p>
+                <p className="text-sm font-bold leading-tight text-white whitespace-nowrap">Book Appointment</p>
+              </div>
+            </div>
+          </a>
+
+          {/* WhatsApp */}
+          <a
+            href="https://wa.me/919597814476"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group rounded-2xl border border-rr-ink/10 px-5 py-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-[#25D366]/35 hover:shadow-[0_10px_28px_rgba(37,211,102,0.15)] active:scale-[0.97]"
+            style={{ background: "rgba(255,255,255,0.88)" }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="rounded-full p-2" style={{ background: "rgba(37,211,102,0.12)" }}>
+                <MessageCircle size={15} strokeWidth={2.5} style={{ color: "#25D366" }} />
+              </div>
+              <div>
+                <p className="text-[8px] font-semibold uppercase tracking-[0.35em] text-rr-ink/40">Chat with us</p>
+                <p className="text-sm font-bold leading-tight text-rr-ink whitespace-nowrap">WhatsApp</p>
+              </div>
+            </div>
+          </a>
+        </motion.div>
+
+        {/* Bottom-left: tagline only */}
+        <div className="absolute bottom-10 left-10 xl:left-14" style={{ zIndex: 30 }}>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.65, ease }}
-            className="font-display max-w-[26ch] text-sm italic leading-relaxed text-rr-ink/50"
+            className="font-display max-w-[22ch] text-sm italic leading-relaxed text-rr-ink/45"
           >
             Where beauty meets personal care —<br />every visit, a private retreat.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.05, duration: 0.65, ease }}
-            className="mt-5 flex gap-3"
-          >
-            <a
-              href="/#booking"
-              className="inline-flex items-center gap-2 rounded-full bg-rr-red px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-rr-red/30 transition-all duration-200 hover:brightness-110 active:scale-95"
-            >
-              <Calendar size={14} /> Book Appointment
-            </a>
-            <a
-              href="https://wa.me/919597814476"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-rr-red/30 px-6 py-3 text-sm font-semibold text-rr-red transition-all duration-200 hover:border-rr-red hover:bg-rr-red/5 active:scale-95"
-            >
-              <MessageCircle size={14} /> WhatsApp
-            </a>
-          </motion.div>
         </div>
 
         {/* Bottom-right: stats */}

@@ -134,9 +134,9 @@ export function About() {
         {/* ── RIGHT — full-height image ── */}
         <div className="relative hidden min-h-96 lg:block">
           <img
-            src="/images/bride.png"
+            src="https://images.unsplash.com/photo-1610173827043-9db50e0d8ef9?auto=format&fit=crop&w=900&q=85"
             alt="Red Radiance bridal styling"
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-cover object-top"
           />
 
           {/* Left-edge blend into dark content */}

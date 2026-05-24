@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Red Radiance" },
       { name: "robots", content: "index, follow" },
-      { name: "theme-color", content: "#C00000" },
+      { name: "theme-color", content: "#e10e11" },
       // Geo tags for local SEO
       { name: "geo.region", content: "IN-TN" },
       { name: "geo.placename", content: "Keelkattalai, Chennai, Tamil Nadu, India" },

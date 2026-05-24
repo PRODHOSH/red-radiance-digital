@@ -39,11 +39,38 @@ const REVIEWS = [
     rating: 5,
     text: "Good service.",
   },
+  {
+    id: "r7",
+    name: "Deepa Venkat",
+    rating: 5,
+    text: "Got my bridal makeup done here and the team was absolutely fantastic! The makeup was flawless, natural, and lasted all day. The hair styling was also beautiful. Highly recommend for any bride-to-be.",
+  },
+  {
+    id: "r8",
+    name: "Priya Rajan",
+    rating: 5,
+    text: "Excellent service! I visited for a facial and D-tan. The aesthetician was very knowledgeable and the facial massage was incredibly relaxing. My skin feels fresh and glowing.",
+  },
+  {
+    id: "r9",
+    name: "Kavitha Natarajan",
+    rating: 5,
+    text: "Very neat and clean salon. I usually go here for my regular threading and waxing. The staff is polite, very quick, and they make sure it's as painless as possible. Great value for money.",
+  },
+  {
+    id: "r10",
+    name: "Divya Krishnan",
+    rating: 5,
+    text: "Loved the hair spa treatment! My hair was feeling very dry and frizzy, but after the spa, it feels so soft and manageable. The head massage was the best part.",
+  },
 ];
 
-// Split reviews into two rows for criss-cross effect
-const ROW1 = [...REVIEWS, ...REVIEWS, ...REVIEWS];
-const ROW2 = [...[...REVIEWS].reverse(), ...[...REVIEWS].reverse(), ...[...REVIEWS].reverse()];
+// Split reviews into two distinct rows so the same names never stack vertically
+const ROW1_DATA = REVIEWS.slice(0, 5);
+const ROW2_DATA = REVIEWS.slice(5, 10);
+
+const ROW1 = [...ROW1_DATA, ...ROW1_DATA, ...ROW1_DATA, ...ROW1_DATA];
+const ROW2 = [...ROW2_DATA, ...ROW2_DATA, ...ROW2_DATA, ...ROW2_DATA];
 
 function GoogleLogo() {
   return (
@@ -70,33 +97,47 @@ function Stars({ count = 5 }: { count?: number }) {
 
 function ReviewCard({ review, colorIdx }: { review: typeof REVIEWS[0]; colorIdx: number }) {
   return (
-    <div className="w-72 shrink-0 border-2 border-rr-ink/8 bg-rr-surface p-5 shadow-[4px_4px_0_rgba(192,0,0,0.18)]">
-      {/* Google + stars */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-1.5">
+    <div
+      className="relative w-72 shrink-0 overflow-hidden rounded-2xl bg-white p-6"
+      style={{ boxShadow: "0 2px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)" }}
+    >
+      {/* Red top accent */}
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-linear-to-r from-rr-red via-rr-red/70 to-transparent" />
+
+      {/* Decorative giant quote mark */}
+      <div
+        className="pointer-events-none absolute -right-2 -top-5 select-none font-bebas text-[8rem] leading-none text-rr-red/[0.07]"
+        aria-hidden
+      >
+        "
+      </div>
+
+      {/* Google badge + stars */}
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-1.5 rounded-full bg-rr-cream px-2.5 py-1">
           <GoogleLogo />
-          <span className="text-[9px] uppercase tracking-[0.3em] text-rr-ink/35">Google Review</span>
+          <span className="text-[8.5px] uppercase tracking-[0.28em] text-rr-ink/40">Google</span>
         </div>
         <Stars count={review.rating} />
       </div>
 
       {/* Quote */}
-      <p className="font-display text-sm italic leading-relaxed text-rr-ink/65 line-clamp-3">
+      <p className="font-display relative z-10 text-[0.88rem] italic leading-relaxed text-rr-ink/65 line-clamp-4">
         "{review.text}"
       </p>
 
       {/* Author */}
-      <div className="mt-4 flex items-center gap-2.5 border-t border-rr-ink/8 pt-4">
+      <div className="mt-5 flex items-center gap-3">
         <div
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white shadow-sm"
           style={{ backgroundColor: G_COLORS[colorIdx % G_COLORS.length] }}
         >
           {review.name.charAt(0)}
         </div>
         <div>
-          <div className="font-bebas text-base leading-none text-rr-ink">{review.name}</div>
-          <div className="mt-0.5 flex items-center gap-1 text-[9px] text-rr-ink/35">
-            <GoogleLogo /> Posted on Google
+          <div className="text-[0.82rem] font-semibold leading-none text-rr-ink">{review.name}</div>
+          <div className="mt-1 flex items-center gap-1 text-[9px] text-rr-ink/35">
+            <GoogleLogo /> Verified on Google
           </div>
         </div>
       </div>

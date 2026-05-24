@@ -71,49 +71,66 @@ export function Offers() {
 function Ticket({ combo, wide }: { combo: Combo; wide?: boolean }) {
   return (
     <motion.div
-      whileHover={{ y: -3 }}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
-      className="group flex overflow-hidden border-2 border-rr-ink/10 bg-rr-surface shadow-[5px_5px_0_rgba(192,0,0,0.35)] transition-shadow duration-200 hover:shadow-[7px_7px_0_rgba(192,0,0,0.45)]"
+      className="group flex overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow duration-300 hover:shadow-[0_12px_40px_rgba(225,14,17,0.18)]"
     >
-      {/* Left: price panel */}
-      <div className="relative flex w-28 shrink-0 flex-col items-center justify-center bg-rr-red px-4 py-8 text-white">
+      {/* Left: price panel — gradient + diagonal texture */}
+      <div
+        className="relative flex w-32 shrink-0 flex-col items-center justify-center overflow-hidden px-4 py-8 text-white"
+        style={{ background: "linear-gradient(150deg, #e10e11 0%, #b80b0d 100%)" }}
+      >
+        {/* Diagonal stripe overlay */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 1px, transparent 1px, transparent 10px)",
+          }}
+        />
         {!!combo.summer && (
-          <span className="mb-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/70">☀ Summer</span>
+          <span className="relative z-10 mb-2 text-[8px] font-bold uppercase tracking-[0.2em] text-white/70">
+            ☀ Summer
+          </span>
         )}
-        <div className="flex items-start leading-none">
-          <span className="mt-1 font-bebas text-base text-white/70">₹</span>
-          <span className="font-bebas text-5xl leading-none">{combo.price}</span>
+        <div className="relative z-10 flex items-start leading-none">
+          <span className="mt-1 font-bebas text-base text-white/60">₹</span>
+          <span className="font-bebas text-[3.5rem] leading-none">{combo.price}</span>
         </div>
-        <div className="pointer-events-none absolute inset-0 flex items-end justify-start overflow-hidden p-2 opacity-10">
-          <span className="font-bebas text-[4rem] leading-none text-white">{combo.num}</span>
+        {/* Watermark number */}
+        <div className="pointer-events-none absolute inset-0 flex items-end justify-start overflow-hidden p-2">
+          <span className="font-bebas text-[5rem] leading-none text-white opacity-[0.12]">{combo.num}</span>
         </div>
       </div>
 
-      {/* Perforated dots */}
-      <div className="flex flex-col items-center justify-center gap-1.25 py-4">
-        {Array.from({ length: 14 }).map((_, i) => (
-          <div key={i} className="h-1.5 w-1.5 rounded-full bg-rr-cream" />
+      {/* Perforated divider */}
+      <div className="flex flex-col items-center justify-center gap-1.25 px-1.25">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <div key={i} className="h-1.25 w-1.25 rounded-full bg-rr-ink/10" />
         ))}
       </div>
 
       {/* Right: details */}
       <div className={`flex flex-1 flex-col justify-between p-5 sm:p-6 ${wide ? "sm:flex-row sm:items-center" : ""}`}>
         <div>
-          <p className="text-[9px] uppercase tracking-[0.4em] text-rr-ink/35">{combo.num} — {combo.name}</p>
+          <p className="text-[9px] uppercase tracking-[0.4em] text-rr-red/60">{combo.num} — {combo.name}</p>
           <ul className="mt-3 space-y-1.5">
             {combo.parsedServices.map((s) => (
               <li key={s} className="flex items-center gap-2 text-sm text-rr-ink/65">
-                <span className="h-1 w-1 shrink-0 bg-rr-red" />{s}
+                <span className="h-px w-3 shrink-0 bg-rr-red" />{s}
               </li>
             ))}
           </ul>
         </div>
-        <a
-          href="/#booking"
-          className={`inline-flex items-center gap-1.5 self-start border-2 border-rr-red bg-rr-red px-4 py-2.5 text-xs font-semibold text-white shadow-[3px_3px_0_rgba(0,0,0,0.12)] transition-all duration-150 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none ${wide ? "sm:self-center" : "mt-5"}`}
-        >
-          <Calendar size={12} /> Book Now
-        </a>
+        <div className={`flex items-center justify-between gap-4 ${wide ? "sm:flex-col sm:items-end" : "mt-5"}`}>
+          <a
+            href="/#booking"
+            className="inline-flex items-center gap-1.5 self-start rounded-full bg-rr-red px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all duration-200 hover:shadow-md hover:brightness-110"
+          >
+            <Calendar size={12} /> Book Now
+          </a>
+          <span className="text-[8px] uppercase tracking-wider text-rr-ink/25">Mention at booking</span>
+        </div>
       </div>
     </motion.div>
   );

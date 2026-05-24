@@ -1,94 +1,223 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Calendar, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { Calendar, MessageCircle, ArrowDown } from "lucide-react";
 
-const HERO_IMG =
-  "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=2000&q=80";
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY     = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const textY    = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const overlayO = useTransform(scrollYProgress, [0, 1], [0.75, 0.92]);
-
   return (
-    <section id="home" ref={ref} className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-rr-ink">
-      <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0 origin-center">
-        <img src={HERO_IMG} alt="Red Radiance salon interior" className="h-full w-full scale-105 object-cover blur-[3px] brightness-75" fetchPriority="high" />
-      </motion.div>
-      <motion.div
-        style={{ opacity: overlayO }}
-        className="absolute inset-0 bg-linear-to-t from-[#0e0a08] via-[#0e0a08]/60 to-[#0e0a08]/20"
-      />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-1/2 w-2/5 bg-[radial-gradient(ellipse_at_bottom_right,rgba(192,0,0,0.18),transparent_70%)]" />
+    <section id="home" className="relative h-svh min-h-150 w-full overflow-hidden bg-rr-cream">
 
-      <motion.div style={{ y: textY }} className="absolute inset-x-0 bottom-0 px-6 pb-20 sm:px-12 md:px-16 lg:px-20">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mb-5 flex items-center gap-3"
-        >
-          <div className="h-px w-10 bg-rr-red" />
-          <span className="text-[10px] font-medium uppercase tracking-[0.5em] text-white/55">
-            Premium Ladies Salon · Chennai
-          </span>
-        </motion.div>
+      {/* ══════════════════════════════════════
+          MOBILE  (< lg) — full-bleed image with text overlay
+      ══════════════════════════════════════ */}
+      <div className="relative h-full lg:hidden">
+        {/* Full-bleed portrait image */}
+        <img
+          src="/images/hero.png"
+          alt="Red Radiance bridal styling"
+          className="absolute inset-0 h-full w-full object-cover object-[center_8%]"
+        />
 
-        <div className="overflow-hidden">
-          <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}>
-            <h1 className="font-bebas text-[22vw] leading-none text-rr-red sm:text-[16vw] md:text-[13vw] lg:text-[11vw]">RED</h1>
+        {/* Gradient: transparent top → dark bottom for text */}
+        <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/30 to-black/10" />
+
+        {/* Overlaid content — bottom anchored */}
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-10">
+
+          {/* Brand name */}
+          <div className="overflow-hidden">
+            <motion.div
+              initial={{ y: "105%" }}
+              animate={{ y: "0%" }}
+              transition={{ duration: 0.85, ease, delay: 0.2 }}
+              className="font-bebas text-[23vw] leading-[0.88] text-white"
+            >
+              RED
+            </motion.div>
+          </div>
+          <div className="overflow-hidden">
+            <motion.div
+              initial={{ y: "105%" }}
+              animate={{ y: "0%" }}
+              transition={{ duration: 0.85, ease, delay: 0.32 }}
+              className="font-bebas text-[23vw] leading-[0.88] text-rr-red"
+            >
+              RADIANCE
+            </motion.div>
+          </div>
+
+          {/* Tagline */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.65, duration: 0.6 }}
+            className="font-display mt-2 text-sm italic leading-relaxed text-white/65"
+          >
+            Where beauty meets personal care — every visit, a private retreat.
+          </motion.p>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="mt-4 flex gap-6"
+          >
+            {[["15+", "Years"], ["5000+", "Clients"], ["7", "Days/Week"]].map(([val, label]) => (
+              <div key={label}>
+                <div className="font-bebas text-2xl leading-none text-rr-red">{val}</div>
+                <div className="mt-0.5 text-[9px] uppercase tracking-widest text-white/45">{label}</div>
+              </div>
+            ))}
           </motion.div>
-        </div>
-        <div className="overflow-hidden mt-[-2vw]">
-          <motion.div initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}>
-            <h1 className="font-bebas text-[22vw] leading-none text-white sm:text-[16vw] md:text-[13vw] lg:text-[11vw]">RADIANCE</h1>
-          </motion.div>
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.75 }}
-          className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
-        >
-          <p className="font-display max-w-sm text-base italic text-white/55 sm:text-lg">
-            Where beauty meets personal care — Keelkattalai, Chennai.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.95, duration: 0.6 }}
+            className="mt-5 flex gap-2.5"
+          >
             <a
               href="/#booking"
-              className="inline-flex items-center justify-center border-2 border-rr-red bg-rr-red px-6 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(192,0,0,0.3)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none sm:w-auto lg:px-8"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-rr-red px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-rr-red/40 transition-all duration-200 hover:brightness-110 active:scale-95"
             >
-              <Calendar size={16} /> Book Appointment
+              <Calendar size={14} /> Book Appointment
             </a>
             <a
               href="https://wa.me/919597814476"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border-2 border-white/40 px-7 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(192,0,0,0.5)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:border-white/60 active:scale-95"
             >
-              <MessageCircle size={16} /> WhatsApp
+              <MessageCircle size={14} /> WhatsApp
             </a>
-          </div>
-        </motion.div>
-      </motion.div>
+          </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute right-6 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-2 lg:flex"
-      >
-        <div className="text-[9px] uppercase tracking-[0.4em] text-white/30" style={{ writingMode: "vertical-rl" }}>Scroll</div>
+          {/* Location */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1, duration: 0.6 }}
+            className="mt-4 text-[9px] font-medium uppercase tracking-[0.45em] text-white/30"
+          >
+            Keelkattalai, Chennai
+          </motion.p>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════
+          DESKTOP  (>= lg)
+      ══════════════════════════════════════ */}
+      <div className="relative hidden h-full w-full lg:block">
+
+        {/* "RED" — upper left */}
+        <motion.span
+          initial={{ opacity: 0, x: -60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.1, ease, delay: 0.1 }}
+          className="pointer-events-none absolute left-8 select-none font-bebas leading-none text-rr-ink xl:left-14"
+          style={{ fontSize: "min(18vw, 220px)", zIndex: 10, top: "26%" }}
+        >
+          RED
+        </motion.span>
+
+        {/* ── Central tall image ── */}
         <motion.div
-          animate={{ scaleY: [0, 1, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="h-12 w-px origin-top bg-linear-to-b from-rr-red to-transparent"
-        />
-      </motion.div>
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4, ease, delay: 0.0 }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2"
+          style={{ zIndex: 20, height: "94svh", width: "40vw", maxWidth: "560px" }}
+        >
+          <img
+            src="/images/hero.png"
+            alt="Red Radiance bridal styling"
+            className="h-full w-full object-cover object-top"
+          />
+          {/* Bottom fade — blends image into cream */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-rr-cream via-rr-cream/60 to-transparent" />
+        </motion.div>
+
+        {/* "RADIANCE" — lower right */}
+        <motion.span
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.1, ease, delay: 0.2 }}
+          className="pointer-events-none absolute right-8 select-none text-right font-bebas leading-none text-rr-red xl:right-14"
+          style={{ fontSize: "min(10vw, 118px)", zIndex: 10, top: "52%" }}
+        >
+          RADIANCE
+        </motion.span>
+
+        {/* Bottom-left: tagline + CTAs */}
+        <div className="absolute bottom-10 left-10 xl:left-16" style={{ zIndex: 30 }}>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.85, duration: 0.65, ease }}
+            className="font-display max-w-[26ch] text-sm italic leading-relaxed text-rr-ink/50"
+          >
+            Where beauty meets personal care —<br />every visit, a private retreat.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.05, duration: 0.65, ease }}
+            className="mt-5 flex gap-3"
+          >
+            <a
+              href="/#booking"
+              className="inline-flex items-center gap-2 rounded-full bg-rr-red px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-rr-red/30 transition-all duration-200 hover:brightness-110 active:scale-95"
+            >
+              <Calendar size={14} /> Book Appointment
+            </a>
+            <a
+              href="https://wa.me/919597814476"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-rr-red/30 px-6 py-3 text-sm font-semibold text-rr-red transition-all duration-200 hover:border-rr-red hover:bg-rr-red/5 active:scale-95"
+            >
+              <MessageCircle size={14} /> WhatsApp
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Bottom-right: stats */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1, duration: 0.6 }}
+          className="absolute bottom-10 right-10 flex gap-8 xl:right-16"
+          style={{ zIndex: 30 }}
+        >
+          {[["15+", "Years"], ["5000+", "Clients"], ["7", "Days/Week"]].map(([val, label]) => (
+            <div key={label} className="text-right">
+              <div className="font-bebas text-2xl leading-none text-rr-red">{val}</div>
+              <div className="mt-0.5 text-[9px] uppercase tracking-widest text-rr-ink/40">{label}</div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Bottom-center: location + scroll */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3, duration: 0.8 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          style={{ zIndex: 30 }}
+        >
+          <p className="whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.45em] text-rr-ink/28">
+            Keelkattalai, Chennai
+          </p>
+          <motion.div
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ArrowDown size={12} className="text-rr-ink/25" />
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

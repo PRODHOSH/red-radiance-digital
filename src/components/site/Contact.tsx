@@ -18,7 +18,7 @@ export function Contact() {
 
         <div className="grid gap-6 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
-            <div className="space-y-6 border-2 border-rr-ink/10 bg-rr-surface p-8 shadow-[6px_6px_0_rgba(192,0,0,0.3)]">
+            <div className="space-y-6 rounded-2xl bg-rr-surface p-8 shadow-lg ring-1 ring-rr-ink/8">
               <Info icon={MapPin} title="Address">
                 No.12/1, Senthur St, SRVS Colony,<br />
                 Arul Murugan Nagar Extension,<br />
@@ -34,7 +34,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-3">
-            <div className="overflow-hidden border-2 border-rr-ink/10 shadow-[6px_6px_0_rgba(192,0,0,0.3)]">
+            <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-rr-ink/8">
               <iframe
                 title="Red Radiance location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.2641161300617!2d80.189493!3d12.954944000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d1dee127e81%3A0xdb68fe9dcc2618ed!2sRed%20Radiance!5e0!3m2!1sen!2sin!4v1779456726107!5m2!1sen!2sin"
@@ -53,12 +53,12 @@ export function Contact() {
   );
 }
 
-const pillBtn = "inline-flex items-center gap-1.5 border-2 border-rr-red bg-rr-red px-3.5 py-2.5 text-xs font-semibold text-white shadow-[3px_3px_0_rgba(0,0,0,0.15)] transition-all duration-150 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none";
+const pillBtn = "inline-flex items-center gap-1.5 rounded-full bg-rr-red px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition-all duration-200 hover:shadow-md hover:brightness-110";
 
 function Info({ icon: Icon, title, children }: { icon: React.ComponentType<{ size?: number }>; title: string; children: React.ReactNode }) {
   return (
     <div className="flex gap-4">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-rr-red/20 bg-rr-red/8 text-rr-red"><Icon size={17} /></div>
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rr-red/8 text-rr-red"><Icon size={17} /></div>
       <div>
         <div className="text-[10px] uppercase tracking-widest text-rr-ink/40">{title}</div>
         <div className="mt-1 text-sm leading-relaxed text-rr-ink/70">{children}</div>

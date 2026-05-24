@@ -86,14 +86,14 @@ function CalendarPicker({ value, onChange }: { value: string; onChange: (v: stri
       {/* Month nav */}
       <div className="mb-4 flex items-center justify-between">
         <button type="button" onClick={() => nav(-1)}
-          className="border-2 border-rr-ink/10 p-1.5 text-rr-ink/50 transition-colors hover:border-rr-red hover:text-rr-red">
+          className="rounded-lg border border-rr-ink/10 p-1.5 text-rr-ink/50 transition-colors hover:border-rr-red hover:text-rr-red">
           <ChevronLeft size={15} />
         </button>
         <span className="font-bebas text-lg text-rr-ink">
           {MONTHS[view.month]} {view.year}
         </span>
         <button type="button" onClick={() => nav(1)}
-          className="border-2 border-rr-ink/10 p-1.5 text-rr-ink/50 transition-colors hover:border-rr-red hover:text-rr-red">
+          className="rounded-lg border border-rr-ink/10 p-1.5 text-rr-ink/50 transition-colors hover:border-rr-red hover:text-rr-red">
           <ChevronRight size={15} />
         </button>
       </div>
@@ -116,11 +116,11 @@ function CalendarPicker({ value, onChange }: { value: string; onChange: (v: stri
                 type="button"
                 disabled={isPast(day)}
                 onClick={() => selectDay(day)}
-                className={`h-full w-full text-sm transition-all duration-100 ${
+                className={`h-full w-full rounded-lg text-sm transition-all duration-100 ${
                   isSelected(day)
-                    ? "border-2 border-rr-red bg-rr-red font-semibold text-white shadow-[2px_2px_0_rgba(0,0,0,0.12)]"
+                    ? "bg-rr-red font-semibold text-white shadow-sm"
                     : isToday(day)
-                    ? "border-2 border-rr-red font-semibold text-rr-red"
+                    ? "ring-2 ring-rr-red font-semibold text-rr-red"
                     : isPast(day)
                     ? "cursor-not-allowed text-rr-ink/20"
                     : "text-rr-ink/60 hover:bg-rr-red/10 hover:text-rr-red"
@@ -145,10 +145,10 @@ function TimePicker({ value, onChange }: { value: string; onChange: (v: string) 
           key={slot}
           type="button"
           onClick={() => onChange(slot)}
-          className={`px-1.5 py-2 text-xs font-medium transition-all duration-100 border-2 ${
+          className={`rounded-lg px-1.5 py-2 text-xs font-medium transition-all duration-100 ${
             value === slot
-              ? "border-rr-red bg-rr-red text-white shadow-[2px_2px_0_rgba(0,0,0,0.12)]"
-              : "border-rr-ink/10 text-rr-ink/55 hover:border-rr-red/40 hover:text-rr-red"
+              ? "bg-rr-red text-white shadow-sm"
+              : "bg-rr-surface-2 text-rr-ink/55 hover:bg-rr-red/10 hover:text-rr-red"
           }`}
         >
           {formatTime(slot)}
@@ -179,9 +179,9 @@ function DropdownField({
       <button
         type="button"
         onClick={() => setOpen(v => !v)}
-        className={`w-full border-2 px-4 py-3 text-left text-sm transition-all ${
+        className={`w-full rounded-xl border px-4 py-3 text-left text-sm transition-all ${
           open
-            ? "border-rr-red shadow-[3px_3px_0_rgba(192,0,0,0.3)]"
+            ? "border-rr-red shadow-md ring-2 ring-rr-red/15"
             : "border-rr-ink/10 text-rr-ink/60 hover:border-rr-ink/25"
         } ${display ? "text-rr-ink" : "text-rr-ink/35"}`}
       >
@@ -189,7 +189,7 @@ function DropdownField({
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-40 mt-1 w-full border-2 border-rr-ink/10 bg-rr-surface p-4 shadow-[6px_6px_0_rgba(192,0,0,0.25)]">
+        <div className="absolute left-0 top-full z-40 mt-1 w-full rounded-xl bg-rr-surface p-4 shadow-xl ring-1 ring-rr-ink/8">
           {children}
         </div>
       )}
@@ -266,7 +266,7 @@ export function Booking() {
         </div>
 
         <Reveal delay={0.1}>
-          <form onSubmit={submit} className="border-2 border-rr-ink/10 bg-rr-surface p-6 shadow-[8px_8px_0_rgba(192,0,0,0.3)] sm:p-8">
+          <form onSubmit={submit} className="rounded-2xl bg-rr-surface p-6 shadow-xl ring-1 ring-rr-ink/8 sm:p-8">
             <div className="grid gap-5 sm:grid-cols-2">
               {/* Name */}
               <Field label="Name">
@@ -308,7 +308,7 @@ export function Booking() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex flex-1 items-center justify-center gap-2 border-2 border-rr-red bg-rr-red px-6 py-3.5 text-sm font-semibold text-white shadow-[5px_5px_0_rgba(0,0,0,0.15)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none disabled:cursor-not-allowed disabled:opacity-60 disabled:translate-x-0 disabled:translate-y-0"
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-rr-red px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:shadow-lg hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <Calendar size={15} />
                 {loading ? "Booking..." : "Book Appointment"}
@@ -316,7 +316,7 @@ export function Booking() {
               <button
                 type="button"
                 onClick={whatsapp}
-                className="inline-flex flex-1 items-center justify-center gap-2 border-2 border-rr-ink/15 bg-rr-cream px-6 py-3.5 text-sm font-semibold text-rr-ink/70 shadow-[5px_5px_0_rgba(192,0,0,0.25)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:border-rr-red/50 hover:text-rr-ink hover:shadow-none"
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-rr-ink/15 bg-rr-cream px-6 py-3.5 text-sm font-semibold text-rr-ink/70 shadow-sm transition-all duration-200 hover:border-rr-red/40 hover:text-rr-ink hover:shadow-md"
               >
                 <MessageCircle size={15} /> WhatsApp
               </button>
@@ -331,7 +331,7 @@ export function Booking() {
   );
 }
 
-const inputCls = "w-full border-2 border-rr-ink/10 bg-rr-surface-2 px-4 py-3 text-sm text-rr-ink placeholder:text-rr-ink/30 outline-none transition-all focus:border-rr-red focus:shadow-[3px_3px_0_rgba(192,0,0,0.3)]";
+const inputCls = "w-full rounded-xl border border-rr-ink/10 bg-rr-surface-2 px-4 py-3 text-sm text-rr-ink placeholder:text-rr-ink/30 outline-none transition-all focus:border-rr-red focus:shadow-md focus:ring-2 focus:ring-rr-red/15";
 
 function Field({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) {
   return (

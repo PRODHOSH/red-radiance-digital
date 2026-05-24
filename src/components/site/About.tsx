@@ -1,13 +1,12 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
-import { Sparkles, HeartHandshake, Award, Leaf } from "lucide-react";
 import { Reveal, SectionLabel } from "./Reveal";
 
 const features = [
-  { icon: HeartHandshake, title: "One-on-one attention",  desc: "Dedicated time, no rush." },
-  { icon: Sparkles,       title: "Customized for you",    desc: "Tailored to your skin & hair type." },
-  { icon: Award,          title: "Precision & care",      desc: "Expert hands, premium products." },
-  { icon: Leaf,           title: "Relaxing space",        desc: "Clean, calm, personal retreat." },
+  { title: "One-on-one attention",  desc: "Dedicated time, no rush." },
+  { title: "Customized for you",    desc: "Tailored to your skin & hair type." },
+  { title: "Precision & care",      desc: "Expert hands, premium products." },
+  { title: "Relaxing space",        desc: "Clean, calm, personal retreat." },
 ];
 
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
@@ -31,7 +30,7 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
         };
         requestAnimationFrame(step);
       }}
-      className="font-bebas text-5xl text-rr-red"
+      className="font-bebas text-5xl leading-none text-rr-red"
     >
       0{suffix}
     </motion.span>
@@ -39,77 +38,100 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
 }
 
 export function About() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
-
   return (
-    <section id="about" ref={ref} className="relative overflow-hidden bg-rr-cream py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16">
+    <section id="about" className="relative overflow-hidden bg-rr-cream py-24 sm:py-32">
+      {/* Faint "2011" watermark */}
+      <div
+        className="pointer-events-none absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 select-none font-bebas leading-none text-rr-ink opacity-[0.025]"
+        style={{ fontSize: "clamp(120px, 22vw, 320px)" }}
+        aria-hidden
+      >
+        2011
+      </div>
 
-        {/* ── Left: image stack ── */}
+      <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <div className="relative">
-            {/* Decorative offset frame */}
-            <div className="absolute -left-3 -top-3 h-full w-full border-2 border-rr-red/25" aria-hidden />
-
-            <motion.div style={{ y: imgY }} className="relative overflow-hidden border-2 border-rr-ink/12 shadow-[8px_8px_0_rgba(192,0,0,0.3)]">
-              <img
-                src="/images/entrance.png"
-                alt="Red Radiance salon — Keelkattalai, Chennai"
-                className="w-full object-cover object-top"
-                style={{ aspectRatio: "5/4" }}
-              />
-              {/* Subtle gradient at bottom */}
-              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-rr-ink/30 to-transparent" />
-            </motion.div>
-
-            {/* Est. badge — bottom right */}
-            <div className="absolute -bottom-5 -right-3 border-2 border-rr-red/30 bg-rr-surface px-5 py-4 shadow-[5px_5px_0_rgba(192,0,0,0.4)]">
-              <div className="text-[9px] uppercase tracking-[0.35em] text-rr-red">Est.</div>
-              <div className="font-bebas text-4xl leading-none text-rr-ink">2011</div>
-            </div>
-          </div>
+          <SectionLabel>About Us</SectionLabel>
         </Reveal>
 
-        {/* ── Right: content ── */}
-        <div>
+        {/* ── Main grid ── */}
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16 xl:gap-24">
+
+          {/* LEFT — image + heading stacked */}
           <Reveal>
-            <SectionLabel>About Us</SectionLabel>
-            <h2 className="font-bebas mt-2 text-[clamp(2.5rem,5.5vw,4.5rem)] leading-none text-rr-ink">
-              WHERE BEAUTY MEETS{" "}
-              <span className="text-rr-red">PERSONAL CARE</span>
-            </h2>
-          </Reveal>
+            <div className="flex flex-col gap-6">
+              {/* Heading */}
+              <h2 className="font-bebas text-[clamp(2.8rem,5.5vw,5rem)] leading-[0.92] text-rr-ink">
+                WHERE BEAUTY<br />
+                MEETS <span className="text-rr-red">PERSONAL<br />CARE</span>
+              </h2>
 
-          <Reveal delay={0.1}>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-rr-ink/60">
-              A premium ladies salon in Keelkattalai, Chennai — where every service is
-              delivered with care, precision, and full attention to you. From haircuts
-              and colour to facials, waxing, threading, and bridal makeup.
-            </p>
-            <p className="mt-3 font-display text-base italic text-rr-red">
-              Because you deserve to shine with confidence.
-            </p>
-          </Reveal>
+              {/* Image — clean rectangle, no blob */}
+              <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                <img
+                  src="/images/entrance.png"
+                  alt="Red Radiance salon — Keelkattalai, Chennai"
+                  className="w-full object-cover"
+                  style={{ aspectRatio: "4/3" }}
+                />
+                {/* Bottom gradient */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-rr-ink/40 to-transparent" />
 
-          {/* Feature grid */}
-          <div className="mt-8 grid grid-cols-2 gap-3">
-            {features.map((f, i) => (
-              <Reveal key={f.title} delay={0.1 + i * 0.06}>
-                <div className="group border-2 border-rr-ink/8 bg-rr-surface p-4 shadow-[4px_4px_0_rgba(192,0,0,0.2)] transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-                  <div className="mb-2 flex h-9 w-9 items-center justify-center border border-rr-red/20 bg-rr-red/8 text-rr-red transition-colors group-hover:bg-rr-red group-hover:text-white">
-                    <f.icon size={16} />
-                  </div>
-                  <div className="text-sm font-semibold text-rr-ink">{f.title}</div>
-                  <div className="mt-0.5 text-xs text-rr-ink/50">{f.desc}</div>
+                {/* Est. badge overlaid on image */}
+                <div className="absolute bottom-4 right-4 rounded-xl bg-white/90 px-4 py-3 shadow-lg backdrop-blur-sm">
+                  <div className="text-[8px] uppercase tracking-[0.35em] text-rr-red">Est.</div>
+                  <div className="font-bebas text-3xl leading-none text-rr-ink">2011</div>
                 </div>
-              </Reveal>
-            ))}
+              </div>
+            </div>
+          </Reveal>
+
+          {/* RIGHT — content */}
+          <div className="flex flex-col justify-center">
+            {/* Pull quote */}
+            <Reveal delay={0.08}>
+              <p className="font-display text-[1.35rem] italic leading-relaxed text-rr-red">
+                Because you deserve to shine with confidence.
+              </p>
+            </Reveal>
+
+            {/* Description */}
+            <Reveal delay={0.14}>
+              <p className="mt-5 text-base leading-relaxed text-rr-ink/60">
+                A premium ladies salon in Keelkattalai, Chennai — where every service is
+                delivered with care, precision, and full attention to you. From haircuts
+                and colour to facials, waxing, threading, and bridal makeup.
+              </p>
+            </Reveal>
+
+            {/* Stats row */}
+            <Reveal delay={0.2}>
+              <div className="mt-8 grid grid-cols-3 gap-4 border-y border-rr-ink/10 py-6">
+                {[{ to: 15, suffix: "+", label: "Years" }, { to: 5000, suffix: "+", label: "Clients" }, { to: 7, suffix: "", label: "Days / Week" }].map((s) => (
+                  <div key={s.label}>
+                    <Counter to={s.to} suffix={s.suffix} />
+                    <p className="mt-1 text-[10px] uppercase tracking-widest text-rr-ink/40">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* Features — minimal list */}
+            <div className="mt-7 space-y-4">
+              {features.map((f, i) => (
+                <Reveal key={f.title} delay={0.25 + i * 0.06}>
+                  <div className="flex items-start gap-4">
+                    <div className="mt-[0.6rem] h-px w-7 shrink-0 bg-rr-red" />
+                    <div>
+                      <div className="text-sm font-semibold text-rr-ink">{f.title}</div>
+                      <div className="mt-0.5 text-sm text-rr-ink/45">{f.desc}</div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

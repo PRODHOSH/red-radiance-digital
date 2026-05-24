@@ -100,7 +100,7 @@ function Careers() {
               Apply on WhatsApp
             </a>
             <a
-              href="mailto:redradiancebeautysalon@gmail.com?subject=Application%20–%20Hair%20%26%20Beauty%20Stylist"
+              href="mailto:website.redradiance@gmail.com?subject=Application%20–%20Hair%20%26%20Beauty%20Stylist"
               className="inline-flex items-center gap-2 rounded-full border-2 border-rr-red/25 px-7 py-3.5 text-sm font-semibold text-rr-red transition-all duration-200 hover:border-rr-red hover:bg-rr-red/5 active:scale-95"
             >
               Send Resume

@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, MapPin } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Mail } from "lucide-react";
 import { Logo } from "./Logo";
 
 const SERVICES = [
@@ -83,6 +83,10 @@ export function Footer() {
             <a href="https://wa.me/919597814476" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/45 transition-colors hover:text-white">
               <MessageCircle size={13} className="text-rr-red shrink-0" />
               Chat on WhatsApp
+            </a>
+            <a href="mailto:website.redradiance@gmail.com" className="flex items-center gap-2 text-sm text-white/45 transition-colors hover:text-white">
+              <Mail size={13} className="text-rr-red shrink-0" />
+              website.redradiance@gmail.com
             </a>
           </div>
         </div>

@@ -97,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://redradiance.in/" },
-      { property: "og:image", content: "https://redradiance.in/images/logo.png" },
+      { property: "og:image", content: "https://redradiance.in/images/og-image.png" },
       { property: "og:image:alt", content: "Red Radiance Ladies Salon – Keelkattalai, Chennai" },
       { property: "og:site_name", content: "Red Radiance" },
       { property: "og:locale", content: "en_IN" },
@@ -105,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Red Radiance – Best Ladies Salon in Keelkattalai, Chennai" },
       { name: "twitter:description", content: "Premium ladies beauty salon in Chennai. Hair, skin, bridal & beauty services. Open daily 10AM–9PM." },
-      { name: "twitter:image", content: "https://redradiance.in/images/logo.png" },
+      { name: "twitter:image", content: "https://redradiance.in/images/og-image.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

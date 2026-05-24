@@ -128,9 +128,9 @@ export function Footer() {
           <div>© {new Date().getFullYear()} Red Radiance – Ladies Salon. All rights reserved.</div>
           <div>
             Designed & Developed by{" "}
-            <span className="text-white/50 transition-colors hover:text-rr-red">
+            <a href="https://prodhosh.me" target="_blank" rel="noopener noreferrer" className="text-white/50 transition-colors hover:text-rr-red">
               Prodhosh V.S
-            </span>
+            </a>
           </div>
         </div>
       </div>

@@ -80,7 +80,8 @@ export function Hero() {
           >
             <a
               href="/#booking"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-rr-red px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-rr-red/40 transition-all duration-200 hover:brightness-110 active:scale-95"
+              className="flex-1 inline-flex items-center justify-center gap-2 border-2 border-rr-ink bg-rr-red px-4 py-3 text-sm font-semibold text-white transition-all duration-100 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_#1a1a1a] active:translate-x-1 active:translate-y-1 active:shadow-none"
+              style={{ boxShadow: "4px 4px 0 #1a1a1a" }}
             >
               <Calendar size={14} /> Book Appointment
             </a>
@@ -88,9 +89,10 @@ export function Hero() {
               href="https://wa.me/919597814476"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:border-white/60 active:scale-95"
+              className="flex-1 inline-flex items-center justify-center gap-2 border-2 border-rr-ink bg-white px-4 py-3 text-sm font-semibold text-rr-ink transition-all duration-100 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_#1a1a1a] active:translate-x-1 active:translate-y-1 active:shadow-none"
+              style={{ boxShadow: "4px 4px 0 #1a1a1a" }}
             >
-              <MessageCircle size={14} /> WhatsApp
+              <MessageCircle size={14} style={{ color: "#25D366" }} /> WhatsApp
             </a>
           </motion.div>
 
